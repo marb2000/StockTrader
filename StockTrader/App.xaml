@@ -1,0 +1,15 @@
+﻿<prism:PrismApplication x:Class="StockTraderRI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TabItemResource.xaml"/>
+                <ResourceDictionary Source="Themes/WindowRegionResource.xaml"/>
+                <ResourceDictionary Source="Themes/Styles.xaml"/>
+                <ResourceDictionary Source="Themes/AnimatedTabControl.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>

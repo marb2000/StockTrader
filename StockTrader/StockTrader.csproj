@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity" Version="7.2.0.1367" />
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StockTraderRI.ChartControls\StockTraderRI.ChartControls.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Infrastructure\StockTraderRI.Infrastructure.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Modules.Market\StockTraderRI.Modules.Market.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Modules.News\StockTraderRI.Modules.News.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Modules.Position\StockTraderRI.Modules.Position.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Modules.WatchList\StockTraderRI.Modules.WatchList.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\background.png" />
+    <Resource Include="Resources\shadow_b.png" />
+    <Resource Include="Resources\shadow_bl.png" />
+    <Resource Include="Resources\shadow_br.png" />
+    <Resource Include="Resources\shadow_l.png" />
+    <Resource Include="Resources\shadow_r.png" />
+    <Resource Include="Resources\shadow_t.png" />
+    <Resource Include="Resources\shadow_tl.png" />
+    <Resource Include="Resources\shadow_tr.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Styles.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="Themes\TabItemResource.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="Themes\WindowRegionResource.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="Themes\generic.xaml">
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+  </ItemGroup>
+
+</Project>
