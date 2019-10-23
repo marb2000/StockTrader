@@ -8,6 +8,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     x:Name="UserControl">
     <UserControl.Resources>
+
         <ControlTemplate x:Key="ErrorTemplate">
             <Border BorderBrush="Red" BorderThickness="2">
                 <AdornedElementPlaceholder />
@@ -17,9 +18,7 @@
         <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
-                                                               Path=(Validation.Errors), 
-                                                               Converter={StaticResource errorConverter}}"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors), Converter={StaticResource errorConverter}}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -47,26 +46,10 @@
         </StackPanel>
 
         <TextBlock Grid.Row="0" Grid.Column="2" Text="Shares:" Foreground="#FF444444" VerticalAlignment="Center" Width="Auto" Height="Auto" HorizontalAlignment="Right" Grid.ColumnSpan="1" Margin="5,0,0,0" />
-        <TextBox Grid.Row="0" Grid.Column="3" AutomationProperties.AutomationId="SharesTextBox" Name="SharesTextBox" 
-                 Text="{Binding Path=Shares, 
-                                Mode=TwoWay,
-                                UpdateSourceTrigger=PropertyChanged, 
-                                ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, 
-                                Converter={StaticResource stringToNullableNumberConverter}}" 
-                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
-                                HorizontalAlignment="Stretch" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0" />
+        <TextBox Grid.Row="0" Grid.Column="3" AutomationProperties.AutomationId="SharesTextBox" Name="SharesTextBox" Text="{Binding Path=Shares, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalAlignment="Stretch" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0" />
 
         <TextBlock Grid.Row="0" Grid.Column="4" Text="Price Limit:" Foreground="#FF444444" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="5,0,0,0" />
-        <TextBox Name="StopLimitPriceTextBox" AutomationProperties.AutomationId="PriceLimitTextBox" 
-                 Text="{Binding Path=StopLimitPrice, 
-                        Mode=TwoWay,
-                        UpdateSourceTrigger=PropertyChanged, 
-                        ValidatesOnExceptions=True, 
-                        NotifyOnValidationError=True, 
-                        ValidatesOnDataErrors=True, 
-                        Converter={StaticResource stringToNullableNumberConverter}}" 
-                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
-                        Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0"  />
+        <TextBox Name="StopLimitPriceTextBox" AutomationProperties.AutomationId="PriceLimitTextBox" Text="{Binding Path=StopLimitPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0"  />
 
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Width="Auto" Height="Auto" Text="Order Type:" Foreground="#FF444444" VerticalAlignment="Center" Margin="5,0,0,0" />
         <ComboBox x:Name="OrderTypeCombo" AutomationProperties.AutomationId="OrderTypeComboBox" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=OrderType, Mode=TwoWay}" ItemsSource="{Binding AvailableOrderTypes}" SelectedValuePath="Value" Grid.Row="1" Grid.Column="1" Width="120" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5,0,0,0" />

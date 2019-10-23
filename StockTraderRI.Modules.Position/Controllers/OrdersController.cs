@@ -32,14 +32,22 @@ namespace StockTraderRI.Modules.Position.Controllers
 
             _regionManager = regionManager;
             _accountPositionService = accountPositionService;
-            _commandProxy = commandProxy;
-
-            BuyCommand = new DelegateCommand<string>((a)=> StartOrder(a, TransactionType.Buy));
-            SellCommand = new DelegateCommand<string>((a)=> StartOrder(a, TransactionType.Sell));
+            this._commandProxy = commandProxy;
+            BuyCommand = new DelegateCommand<string>(OnBuyExecuted);
+            SellCommand = new DelegateCommand<string>(OnSellExecuted);
             SubmitAllVoteOnlyCommand = new DelegateCommand(() => { }, SubmitAllCanExecute);
-
             OrderModels = new List<IOrderCompositeViewModel>();
             commandProxy.SubmitAllOrdersCommand.RegisterCommand(SubmitAllVoteOnlyCommand);
+        }
+
+        void OnSellExecuted(string parameter)
+        {
+            StartOrder(parameter, TransactionType.Sell);
+        }
+
+        void OnBuyExecuted(string parameter)
+        {
+            StartOrder(parameter, TransactionType.Buy);
         }
 
         virtual protected bool SubmitAllCanExecute()
@@ -80,11 +88,11 @@ namespace StockTraderRI.Modules.Position.Controllers
 
         virtual protected void StartOrder(string tickerSymbol, TransactionType transactionType)
         {
-            if (string.IsNullOrEmpty(tickerSymbol))
+            if (String.IsNullOrEmpty(tickerSymbol))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeNullOrEmpty, "tickerSymbol"));
             }
-            ShowOrdersView();
+            this.ShowOrdersView();
 
             IRegion ordersRegion = _regionManager.Regions[RegionNames.OrdersRegion];
 
@@ -101,7 +109,7 @@ namespace StockTraderRI.Modules.Position.Controllers
                 ordersRegion.Remove(orderCompositeViewModel);
                 if (ordersRegion.Views.Count() == 0)
                 {
-                    RemoveOrdersView();
+                    this.RemoveOrdersView();
                 }
             };
 

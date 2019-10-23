@@ -7,7 +7,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
 {
     public interface IOrderDetailsViewModel
     {
-        event EventHandler CloseViewRequested;  // TODO consider interaction request
+        event EventHandler CloseViewRequested; 
 
         TransactionInfo TransactionInfo { get; set; }
 
@@ -19,8 +19,8 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         decimal? StopLimitPrice { get; }
 
-        DelegateCommand SubmitCommand { get; }
+        DelegateCommand<object> SubmitCommand { get; }
 
-        DelegateCommand CancelCommand { get; }
+        DelegateCommand<object> CancelCommand { get; }
     }
 }

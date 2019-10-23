@@ -9,9 +9,9 @@ namespace StockTraderRI.Modules.Position.ViewModels
 {
     public class PositionSummaryViewModel : BindableBase, IPositionSummaryViewModel
     {
-        private PositionSummaryItem currentPositionSummaryItem;
+        private PositionSummaryItem _currentPositionSummaryItem;
 
-        private readonly IEventAggregator eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
 
         public IObservablePosition Position { get; private set; }
 
@@ -22,13 +22,13 @@ namespace StockTraderRI.Modules.Position.ViewModels
                 throw new ArgumentNullException("ordersController");
             }
 
-            this.eventAggregator = eventAggregator;
-            this.Position = observablePosition;
+            _eventAggregator = eventAggregator;
+            Position = observablePosition;
 
             BuyCommand = ordersController.BuyCommand;
             SellCommand = ordersController.SellCommand;
 
-            this.CurrentPositionSummaryItem = new PositionSummaryItem("FAKEINDEX", 0, 0, 0);
+            CurrentPositionSummaryItem = new PositionSummaryItem("FAKEINDEX", 0, 0, 0);
         }
 
         public ICommand BuyCommand { get; private set; }
@@ -37,19 +37,19 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         public string HeaderInfo
         {
-            get { return "POSITION"; }
+            get=> "POSITION"; 
         }
 
         public PositionSummaryItem CurrentPositionSummaryItem
         {
-            get { return currentPositionSummaryItem; }
+            get => _currentPositionSummaryItem; 
             set
             {
-                if (SetProperty(ref currentPositionSummaryItem, value))
+                if (SetProperty(ref _currentPositionSummaryItem, value))
                 {
-                    if (currentPositionSummaryItem != null)
+                    if (_currentPositionSummaryItem != null)
                     {
-                        eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Publish(
+                        _eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Publish(
                             CurrentPositionSummaryItem.TickerSymbol);
                     }
                 }

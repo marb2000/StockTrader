@@ -1,4 +1,5 @@
 using Prism.Mvvm;
+
 namespace StockTraderRI.Modules.Position
 {
     public class PositionSummaryItem : BindableBase

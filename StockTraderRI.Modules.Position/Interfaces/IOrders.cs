@@ -1,5 +1,3 @@
-using StockTraderRI.Modules.Position.ViewModels;
-
 namespace StockTraderRI.Modules.Position.Interfaces
 {
     public interface IOrders

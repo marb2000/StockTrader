@@ -21,10 +21,15 @@ namespace StockTraderRI.Modules.Position.ViewModels
             }
 
             this.orderDetailsViewModel = orderDetailsViewModel;
-            this.orderDetailsViewModel.CloseViewRequested += (sender, e) => CloseViewRequested(sender, e);
+            this.orderDetailsViewModel.CloseViewRequested += OnCloseViewRequested;
         }
-
+  
         partial void SetTransactionInfo(TransactionInfo transactionInfo);
+
+        private void OnCloseViewRequested(object sender, EventArgs e)
+        {
+            CloseViewRequested(sender, e);
+        }
 
         public event EventHandler CloseViewRequested = delegate { };
 

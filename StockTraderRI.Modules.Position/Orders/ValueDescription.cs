@@ -1,5 +1,3 @@
-
-
 namespace StockTraderRI.Modules.Position.ViewModels
 {
     public class ValueDescription<T> where T: struct

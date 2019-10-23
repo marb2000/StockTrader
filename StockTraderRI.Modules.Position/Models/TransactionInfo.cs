@@ -5,43 +5,27 @@ namespace StockTraderRI.Modules.Position.Models
 {
     public class TransactionInfo : BindableBase
     {
-        private string tickerSymbol;
-        private TransactionType transactionType;
+        private string _tickerSymbol;
+        private TransactionType _transactionType;
 
-        public TransactionInfo()
-        {
-        }
+        public TransactionInfo() { }
 
         public TransactionInfo(string tickerSymbol, TransactionType transactionType)
         {
-            this.tickerSymbol = tickerSymbol;
-            this.transactionType = transactionType;
+            _tickerSymbol = tickerSymbol;
+            _transactionType = transactionType;
         }
 
         public string TickerSymbol
         {
-            get
-            {
-                return this.tickerSymbol;
-            }
-
-            set
-            {
-                SetProperty(ref this.tickerSymbol, value);
-            }
+            get => _tickerSymbol;
+            set => SetProperty(ref _tickerSymbol, value);
         }
 
         public TransactionType TransactionType
         {
-            get
-            {
-                return this.transactionType;
-            }
-
-            set
-            {
-                SetProperty(ref this.transactionType, value);
-            }
+            get => _transactionType;
+            set => SetProperty(ref _transactionType, value);
         }
     }
 }

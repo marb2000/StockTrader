@@ -1,5 +1,3 @@
-using StockTraderRI.Modules.Position.ViewModels;
-
 namespace StockTraderRI.Modules.Position.ViewModels
 {
     public class PositionPieChartViewModel : IPositionPieChartViewModel
