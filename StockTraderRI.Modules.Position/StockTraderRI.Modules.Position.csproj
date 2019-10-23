@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IOrders.cs" />
+    <Compile Remove="ViewModels\IOrderCompositeViewModel.cs" />
+    <Compile Remove="ViewModels\IOrderDetailsViewModel.cs" />
+    <Compile Remove="ViewModels\IOrdersViewModel.cs" />
+    <Compile Remove="ViewModels\IPositionPieChartViewModel.cs" />
+    <Compile Remove="ViewModels\IPositionSummaryViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Data\AccountPositions.xml" />
   </ItemGroup>
 
@@ -19,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Data\AccountPositions.xml" />
+    <Resource Include="Data\AccountPositions.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -15,8 +15,8 @@ namespace StockTraderRI.ChartControls
 
         public Pen LinePen
         {
-            get { return (Pen)GetValue(LinePenProperty); }
-            set { SetValue(LinePenProperty, value); }
+            get => (Pen)GetValue(LinePenProperty);
+            set => SetValue(LinePenProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LinePen.  This enables animation, styling, binding, etc...
@@ -26,8 +26,8 @@ namespace StockTraderRI.ChartControls
 
         public Brush AreaBrush
         {
-            get { return (Brush)GetValue(AreaBrushProperty); }
-            set { SetValue(AreaBrushProperty, value); }
+            get => (Brush)GetValue(AreaBrushProperty);
+            set => SetValue(AreaBrushProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for AreaBrush.  This enables animation, styling, binding, etc...
@@ -37,8 +37,8 @@ namespace StockTraderRI.ChartControls
 
         public bool IsSmoothOutline
         {
-            get { return (bool)GetValue(IsSmoothOutlineProperty); }
-            set { SetValue(IsSmoothOutlineProperty, value); }
+            get => (bool)GetValue(IsSmoothOutlineProperty);
+            set => SetValue(IsSmoothOutlineProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for IsSmoothOutline.  This enables animation, styling, binding, etc...
@@ -49,8 +49,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplate ValueAxisItemTemplate
         {
-            get { return (DataTemplate)GetValue(ValueAxisItemTemplateProperty); }
-            set { SetValue(ValueAxisItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue(ValueAxisItemTemplateProperty);
+            set => SetValue(ValueAxisItemTemplateProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueAxisItemTemplate.  This enables animation, styling, binding, etc...
@@ -60,8 +60,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplateSelector ValueAxisItemTemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(ValueAxisItemTemplateSelectorProperty); }
-            set { SetValue(ValueAxisItemTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)GetValue(ValueAxisItemTemplateSelectorProperty);
+            set => SetValue(ValueAxisItemTemplateSelectorProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueAxisItemTemplateSelector.  This enables animation, styling, binding, etc...
@@ -71,8 +71,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplate LabelAxisItemTemplate
         {
-            get { return (DataTemplate)GetValue(LabelAxisItemTemplateProperty); }
-            set { SetValue(LabelAxisItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue(LabelAxisItemTemplateProperty);
+            set => SetValue(LabelAxisItemTemplateProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelAxisItemTemplate.  This enables animation, styling, binding, etc...
@@ -82,8 +82,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplateSelector LabelAxisItemTemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(LabelAxisItemTemplateSelectorProperty); }
-            set { SetValue(LabelAxisItemTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)GetValue(LabelAxisItemTemplateSelectorProperty);
+            set => SetValue(LabelAxisItemTemplateSelectorProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelAxisItemTemplateSelector.  This enables animation, styling, binding, etc...
@@ -93,8 +93,8 @@ namespace StockTraderRI.ChartControls
 
         public object ValueAxisTitle
         {
-            get { return (object)GetValue(ValueAxisTitleProperty); }
-            set { SetValue(ValueAxisTitleProperty, value); }
+            get => (object)GetValue(ValueAxisTitleProperty);
+            set => SetValue(ValueAxisTitleProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueAxisTitle.  This enables animation, styling, binding, etc...
@@ -104,8 +104,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplate ValueAxisTitleTemplate
         {
-            get { return (DataTemplate)GetValue(ValueAxisTitleTemplateProperty); }
-            set { SetValue(ValueAxisTitleTemplateProperty, value); }
+            get => (DataTemplate)GetValue(ValueAxisTitleTemplateProperty);
+            set => SetValue(ValueAxisTitleTemplateProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueAxisTitleTemplate.  This enables animation, styling, binding, etc...
@@ -115,8 +115,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplateSelector ValueAxisTitleTemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(ValueAxisTitleTemplateSelectorProperty); }
-            set { SetValue(ValueAxisTitleTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)GetValue(ValueAxisTitleTemplateSelectorProperty);
+            set => SetValue(ValueAxisTitleTemplateSelectorProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueAxisTitleTemplateSelector.  This enables animation, styling, binding, etc...
@@ -126,8 +126,8 @@ namespace StockTraderRI.ChartControls
 
         public object LabelAxisTitle
         {
-            get { return (object)GetValue(LabelAxisTitleProperty); }
-            set { SetValue(LabelAxisTitleProperty, value); }
+            get => (object)GetValue(LabelAxisTitleProperty);
+            set => SetValue(LabelAxisTitleProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelAxisTitle.  This enables animation, styling, binding, etc...
@@ -137,8 +137,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplate LabelAxisTitleTemplate
         {
-            get { return (DataTemplate)GetValue(LabelAxisTitleTemplateProperty); }
-            set { SetValue(LabelAxisTitleTemplateProperty, value); }
+            get => (DataTemplate)GetValue(LabelAxisTitleTemplateProperty);
+            set => SetValue(LabelAxisTitleTemplateProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelAxisTitleTemplate.  This enables animation, styling, binding, etc...
@@ -148,8 +148,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplateSelector LabelAxisTitleTemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(LabelAxisTitleTemplateSelectorProperty); }
-            set { SetValue(LabelAxisTitleTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)GetValue(LabelAxisTitleTemplateSelectorProperty);
+            set => SetValue(LabelAxisTitleTemplateSelectorProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelAxisTitleTemplateSelector.  This enables animation, styling, binding, etc...
@@ -159,8 +159,8 @@ namespace StockTraderRI.ChartControls
 
         public PropertyPath ValuePath
         {
-            get { return (PropertyPath)GetValue(ValuePathProperty); }
-            set { SetValue(ValuePathProperty, value); }
+            get => (PropertyPath)GetValue(ValuePathProperty);
+            set => SetValue(ValuePathProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValuePath.  This enables animation, styling, binding, etc...
@@ -170,8 +170,8 @@ namespace StockTraderRI.ChartControls
 
         public PropertyPath LabelPath
         {
-            get { return (PropertyPath)GetValue(LabelPathProperty); }
-            set { SetValue(LabelPathProperty, value); }
+            get => (PropertyPath)GetValue(LabelPathProperty);
+            set => SetValue(LabelPathProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelPath.  This enables animation, styling, binding, etc...
@@ -183,8 +183,8 @@ namespace StockTraderRI.ChartControls
 
         public bool ShowValueAxisTicks
         {
-            get { return (bool)GetValue(ShowValueAxisTicksProperty); }
-            set { SetValue(ShowValueAxisTicksProperty, value); }
+            get => (bool)GetValue(ShowValueAxisTicksProperty);
+            set => SetValue(ShowValueAxisTicksProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ShowValueAxisTicks.  This enables animation, styling, binding, etc...
@@ -195,8 +195,8 @@ namespace StockTraderRI.ChartControls
 
         public bool ShowLabelAxisTicks
         {
-            get { return (bool)GetValue(ShowLabelAxisTicksProperty); }
-            set { SetValue(ShowLabelAxisTicksProperty, value); }
+            get => (bool)GetValue(ShowLabelAxisTicksProperty);
+            set => SetValue(ShowLabelAxisTicksProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ShowLabelAxisTicks.  This enables animation, styling, binding, etc...
@@ -208,8 +208,8 @@ namespace StockTraderRI.ChartControls
 
         public bool ShowValueAxisReferenceLines
         {
-            get { return (bool)GetValue(ShowValueAxisReferenceLinesProperty); }
-            set { SetValue(ShowValueAxisReferenceLinesProperty, value); }
+            get => (bool)GetValue(ShowValueAxisReferenceLinesProperty);
+            set => SetValue(ShowValueAxisReferenceLinesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ShowValueAxisReferenceLines.  This enables animation, styling, binding, etc...
@@ -220,8 +220,8 @@ namespace StockTraderRI.ChartControls
 
         public bool ShowLabelAxisReferenceLines
         {
-            get { return (bool)GetValue(ShowLabelAxisReferenceLinesProperty); }
-            set { SetValue(ShowLabelAxisReferenceLinesProperty, value); }
+            get => (bool)GetValue(ShowLabelAxisReferenceLinesProperty);
+            set => SetValue(ShowLabelAxisReferenceLinesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ShowLabelAxisReferenceLines.  This enables animation, styling, binding, etc...
@@ -232,8 +232,8 @@ namespace StockTraderRI.ChartControls
 
         public Pen ReferenceLinePen
         {
-            get { return (Pen)GetValue(ReferenceLinePenProperty); }
-            set { SetValue(ReferenceLinePenProperty, value); }
+            get => (Pen)GetValue(ReferenceLinePenProperty);
+            set => SetValue(ReferenceLinePenProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ReferenceLinePen.  This enables animation, styling, binding, etc...
@@ -244,8 +244,8 @@ namespace StockTraderRI.ChartControls
 
         public double TickLength
         {
-            get { return (double)GetValue(TickLengthProperty); }
-            set { SetValue(TickLengthProperty, value); }
+            get => (double)GetValue(TickLengthProperty);
+            set => SetValue(TickLengthProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TickLength.  This enables animation, styling, binding, etc...

@@ -13,7 +13,7 @@ namespace StockTraderRI.ChartControls
         {
             if (drawingContext == null)
             {
-                throw new ArgumentNullException("drawingContext");
+                throw new ArgumentNullException(nameof(drawingContext));
             }
 
             base.OnRender(drawingContext);
@@ -57,15 +57,15 @@ namespace StockTraderRI.ChartControls
             }
         }
 
-        public void VerticalAxisTickPositions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void VerticalAxisTickPositions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             InvalidateVisual();                        
         }
 
         public Pen ReferenceLinePen
         {
-            get { return (Pen)GetValue(ReferenceLinePenProperty); }
-            set { SetValue(ReferenceLinePenProperty, value); }
+            get => (Pen)GetValue(ReferenceLinePenProperty);
+            set => SetValue(ReferenceLinePenProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ReferenceLinePen.  This enables animation, styling, binding, etc...
@@ -75,8 +75,8 @@ namespace StockTraderRI.ChartControls
 
         public ObservableCollection<double> VerticalAxisTickPositions
         {
-            get { return (ObservableCollection<double>)GetValue(VerticalAxisTickPositionsProperty); }
-            set { SetValue(VerticalAxisTickPositionsProperty, value); }
+            get => (ObservableCollection<double>)GetValue(VerticalAxisTickPositionsProperty);
+            set => SetValue(VerticalAxisTickPositionsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for VerticalAxisTickPositions.  This enables animation, styling, binding, etc...
@@ -85,8 +85,8 @@ namespace StockTraderRI.ChartControls
 
         public ObservableCollection<double> HorizontalAxisTickPositions
         {
-            get { return (ObservableCollection<double>)GetValue(HorizontalAxisTickPositionsProperty); }
-            set { SetValue(HorizontalAxisTickPositionsProperty, value); }
+            get => (ObservableCollection<double>)GetValue(HorizontalAxisTickPositionsProperty);
+            set => SetValue(HorizontalAxisTickPositionsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for HorizontalAxisTickPositions.  This enables animation, styling, binding, etc...
@@ -95,8 +95,8 @@ namespace StockTraderRI.ChartControls
 
         public double TickMarksLength
         {
-            get { return (double)GetValue(TickMarksLengthProperty); }
-            set { SetValue(TickMarksLengthProperty, value); }
+            get => (double)GetValue(TickMarksLengthProperty);
+            set => SetValue(TickMarksLengthProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TickMarksLength.  This enables animation, styling, binding, etc...
@@ -106,8 +106,8 @@ namespace StockTraderRI.ChartControls
 
         public bool DrawVerticalAxisTickMarks
         {
-            get { return (bool)GetValue(DrawVerticalAxisTickMarksProperty); }
-            set { SetValue(DrawVerticalAxisTickMarksProperty, value); }
+            get => (bool)GetValue(DrawVerticalAxisTickMarksProperty);
+            set => SetValue(DrawVerticalAxisTickMarksProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DrawVerticalAxisTickMarks.  This enables animation, styling, binding, etc...
@@ -117,8 +117,8 @@ namespace StockTraderRI.ChartControls
 
         public bool DrawVerticalAxisReferenceLines
         {
-            get { return (bool)GetValue(DrawVerticalAxisReferenceLinesProperty); }
-            set { SetValue(DrawVerticalAxisReferenceLinesProperty, value); }
+            get => (bool)GetValue(DrawVerticalAxisReferenceLinesProperty);
+            set => SetValue(DrawVerticalAxisReferenceLinesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DrawVerticalAxisReferenceLines.  This enables animation, styling, binding, etc...
@@ -128,8 +128,8 @@ namespace StockTraderRI.ChartControls
 
         public bool DrawHorizontalAxisTickMarks
         {
-            get { return (bool)GetValue(DrawHorizontalAxisTickMarksProperty); }
-            set { SetValue(DrawHorizontalAxisTickMarksProperty, value); }
+            get => (bool)GetValue(DrawHorizontalAxisTickMarksProperty);
+            set => SetValue(DrawHorizontalAxisTickMarksProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DrawHorizontalAxisTickMarks.  This enables animation, styling, binding, etc...
@@ -139,8 +139,8 @@ namespace StockTraderRI.ChartControls
 
         public bool DrawHorizontalAxisReferenceLines
         {
-            get { return (bool)GetValue(DrawHorizontalAxisReferenceLinesProperty); }
-            set { SetValue(DrawHorizontalAxisReferenceLinesProperty, value); }
+            get => (bool)GetValue(DrawHorizontalAxisReferenceLinesProperty);
+            set => SetValue(DrawHorizontalAxisReferenceLinesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DrawHorizontalAxisReferenceLines.  This enables animation, styling, binding, etc...
@@ -150,8 +150,8 @@ namespace StockTraderRI.ChartControls
 
         public double HorizontalAxis
         {
-            get { return (double)GetValue(HorizontalAxisProperty); }
-            set { SetValue(HorizontalAxisProperty, value); }
+            get => (double)GetValue(HorizontalAxisProperty);
+            set => SetValue(HorizontalAxisProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for HorizontalAxis.  This enables animation, styling, binding, etc...
@@ -161,8 +161,8 @@ namespace StockTraderRI.ChartControls
 
         public double VerticalAxis
         {
-            get { return (double)GetValue(VerticalAxisProperty); }
-            set { SetValue(VerticalAxisProperty, value); }
+            get => (double)GetValue(VerticalAxisProperty);
+            set => SetValue(VerticalAxisProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for VerticalAxis.  This enables animation, styling, binding, etc...

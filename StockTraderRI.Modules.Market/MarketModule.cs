@@ -5,7 +5,6 @@ using StockTraderRI.Infrastructure;
 using StockTraderRI.Infrastructure.Interfaces;
 using StockTraderRI.Modules.Market.Services;
 using StockTraderRI.Modules.Market.Views;
-using Unity;
 
 namespace StockTraderRI.Modules.Market
 {

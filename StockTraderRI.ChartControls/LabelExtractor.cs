@@ -91,7 +91,7 @@ namespace StockTraderRI.ChartControls
                 b.XPath = LabelPath.Path;
             else
                 b.Path = LabelPath;
-            BindingOperations.SetBinding(this, LabelExtractor.LabelHolderProperty, b);
+            BindingOperations.SetBinding(this, LabelHolderProperty, b);
         }
 
         private static bool IsXmlNodeHelper(object item)
@@ -101,8 +101,8 @@ namespace StockTraderRI.ChartControls
 
         public ItemCollection Items
         {
-            get { return (ItemCollection)GetValue(ItemsProperty); }
-            set { SetValue(ItemsProperty, value); }
+            get => (ItemCollection)GetValue(ItemsProperty);
+            set => SetValue(ItemsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
@@ -112,8 +112,8 @@ namespace StockTraderRI.ChartControls
 
         public PropertyPath LabelPath
         {
-            get { return (PropertyPath)GetValue(LabelPathProperty); }
-            set { SetValue(LabelPathProperty, value); }
+            get => (PropertyPath)GetValue(LabelPathProperty);
+            set => SetValue(LabelPathProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LabelPath.  This enables animation, styling, binding, etc...
@@ -121,10 +121,7 @@ namespace StockTraderRI.ChartControls
             DependencyProperty.Register("LabelPath", typeof(PropertyPath), typeof(LabelExtractor), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnLabelPathChanged)));
 
 
-        public ObservableCollection<String> Labels
-        {
-            get { return (ObservableCollection<String>)GetValue(LabelsProperty); }
-        }
+        public ObservableCollection<String> Labels => (ObservableCollection<String>)GetValue(LabelsProperty);
 
         // Using a DependencyProperty as the backing store for Labels.  This enables animation, styling, binding, etc...
         private static readonly DependencyPropertyKey LabelsKey =
@@ -134,8 +131,8 @@ namespace StockTraderRI.ChartControls
 
         private String LabelHolder
         {
-            get { return (String)GetValue(LabelHolderProperty); }
-            set { SetValue(LabelHolderProperty, value); }
+            get => (String)GetValue(LabelHolderProperty);
+            set => SetValue(LabelHolderProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for CurrentLabel.  This enables animation, styling, binding, etc...

@@ -11,8 +11,8 @@ namespace StockTraderRI.Modules.Position
 {
     public class ObservablePosition : IObservablePosition
     {
-        private IAccountPositionService accountPositionService;
-        private IMarketFeedService marketFeedService;
+        private IAccountPositionService _accountPositionService;
+        private IMarketFeedService _marketFeedService;
 
         public ObservableCollection<PositionSummaryItem> Items { get; private set; }
 
@@ -20,29 +20,29 @@ namespace StockTraderRI.Modules.Position
         {
             if (eventAggregator == null)
             {
-                throw new ArgumentNullException("eventAggregator");
+                throw new ArgumentNullException(nameof(eventAggregator));
             }
 
-            this.Items = new ObservableCollection<PositionSummaryItem>();
+            Items = new ObservableCollection<PositionSummaryItem>();
 
-            this.accountPositionService = accountPositionService;
-            this.marketFeedService = marketFeedService;
+            _accountPositionService = accountPositionService;
+            _marketFeedService = marketFeedService;
 
             eventAggregator.GetEvent<MarketPricesUpdatedEvent>().Subscribe(MarketPricesUpdated, ThreadOption.UIThread);
 
             PopulateItems();
 
-            this.accountPositionService.Updated += PositionSummaryItems_Updated;
+            _accountPositionService.Updated += PositionSummaryItems_Updated;
         }
 
         public void MarketPricesUpdated(IDictionary<string, decimal> tickerSymbolsPrice)
         {
             if (tickerSymbolsPrice == null)
             {
-                throw new ArgumentNullException("tickerSymbolsPrice");
+                throw new ArgumentNullException(nameof(tickerSymbolsPrice));
             }
 
-            foreach (PositionSummaryItem position in this.Items)
+            foreach (PositionSummaryItem position in Items)
             {
                 if (tickerSymbolsPrice.ContainsKey(position.TickerSymbol))
                 {
@@ -55,7 +55,7 @@ namespace StockTraderRI.Modules.Position
         {
             if (e.AcctPosition != null)
             {
-                PositionSummaryItem positionSummaryItem = this.Items.First(p => p.TickerSymbol == e.AcctPosition.TickerSymbol);
+                PositionSummaryItem positionSummaryItem = Items.First(p => p.TickerSymbol == e.AcctPosition.TickerSymbol);
 
                 if (positionSummaryItem != null)
                 {
@@ -68,10 +68,10 @@ namespace StockTraderRI.Modules.Position
         private void PopulateItems()
         {
             PositionSummaryItem positionSummaryItem;
-            foreach (AccountPosition accountPosition in this.accountPositionService.GetAccountPositions())
+            foreach (AccountPosition accountPosition in _accountPositionService.GetAccountPositions())
             {
-                positionSummaryItem = new PositionSummaryItem(accountPosition.TickerSymbol, accountPosition.CostBasis, accountPosition.Shares, this.marketFeedService.GetPrice(accountPosition.TickerSymbol));
-                this.Items.Add(positionSummaryItem);
+                positionSummaryItem = new PositionSummaryItem(accountPosition.TickerSymbol, accountPosition.CostBasis, accountPosition.Shares, _marketFeedService.GetPrice(accountPosition.TickerSymbol));
+                Items.Add(positionSummaryItem);
             }
         }
     }

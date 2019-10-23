@@ -17,18 +17,18 @@ namespace StockTraderRI.ChartControls
             _largestLabelSize = new Size();
         }
 
-        protected override void OnInitialized(System.EventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
             _parentControl = ((ItemsControl)((FrameworkElement)VisualTreeHelper.GetParent(this)).TemplatedParent);
 
             Binding tickBinding = new Binding();
-            tickBinding.Path = new PropertyPath(DiscreteAxisPanel.TickPositionsProperty);
+            tickBinding.Path = new PropertyPath(TickPositionsProperty);
             tickBinding.Source = this;
             _parentControl.SetBinding(DiscreteAxis.TickPositionsProperty, tickBinding);
 
             Binding originBinding = new Binding();
-            originBinding.Path = new PropertyPath(DiscreteAxisPanel.OriginProperty);
+            originBinding.Path = new PropertyPath(OriginProperty);
             originBinding.Source = this;
             _parentControl.SetBinding(DiscreteAxis.OriginProperty, originBinding);
         }
@@ -201,8 +201,8 @@ namespace StockTraderRI.ChartControls
 
         public double TickMarksLength
         {
-            get { return (double)GetValue(TickMarksLengthProperty); }
-            set { SetValue(TickMarksLengthProperty, value); }
+            get => (double)GetValue(TickMarksLengthProperty);
+            set => SetValue(TickMarksLengthProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TickMarksLength.  This enables animation, styling, binding, etc...
@@ -212,8 +212,8 @@ namespace StockTraderRI.ChartControls
 
         public ObservableCollection<double> TickPositions
         {
-            get { return (ObservableCollection<double>)GetValue(TickPositionsProperty); }
-            set { SetValue(TickPositionsProperty, value); }
+            get => (ObservableCollection<double>)GetValue(TickPositionsProperty);
+            set => SetValue(TickPositionsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for HorizontalAxisTickPositions.  This enables animation, styling, binding, etc...
@@ -224,8 +224,8 @@ namespace StockTraderRI.ChartControls
 
         public Orientation Orientation
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (Orientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
@@ -235,8 +235,8 @@ namespace StockTraderRI.ChartControls
 
         public double Origin
         {
-            get { return (double)GetValue(OriginProperty); }
-            set { SetValue(OriginProperty, value); }
+            get => (double)GetValue(OriginProperty);
+            set => SetValue(OriginProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Origin.  This enables animation, styling, binding, etc...

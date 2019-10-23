@@ -12,7 +12,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
             //This instance of TransactionInfo acts as a "shared model" between this view and the order details view.
             //The scenario says that these 2 views are decoupled, so they don't share the view model, they are only tied
             //with this TransactionInfo
-            this.orderDetailsViewModel.TransactionInfo = transactionInfo;
+            _orderDetailsViewModel.TransactionInfo = transactionInfo;
 
             //Bind the CompositeOrderView header to a string representation of the TransactionInfo shared instance (we expect the details view model to modify it from user interaction).
             MultiBinding binding = new MultiBinding();
@@ -24,8 +24,8 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         public string HeaderInfo
         {
-            get { return (string)GetValue(HeaderInfoProperty); }
-            set { SetValue(HeaderInfoProperty, value); }
+            get => (string)GetValue(HeaderInfoProperty);
+            set => SetValue(HeaderInfoProperty, value);
         }
 
         private class OrderHeaderConverter : IMultiValueConverter
@@ -42,7 +42,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
             {
                 if (values == null)
                 {
-                    throw new ArgumentNullException("values");
+                    throw new ArgumentNullException(nameof(values));
                 }
 
                 if (values.Length < 2)

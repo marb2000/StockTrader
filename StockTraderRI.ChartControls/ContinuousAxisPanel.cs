@@ -6,8 +6,6 @@ using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System;
 using System.Windows.Data;
-using System.Collections;
-using System.ComponentModel;
 using System.Collections.Specialized;
 
 namespace StockTraderRI.ChartControls
@@ -26,39 +24,39 @@ namespace StockTraderRI.ChartControls
         {
             base.OnInitialized(e);
 
-            _parentControl = ((ContinuousAxis)((FrameworkElement)VisualTreeHelper.GetParent(this)).TemplatedParent);
+            ParentControl = ((ContinuousAxis)((FrameworkElement)VisualTreeHelper.GetParent(this)).TemplatedParent);
 
-            if (_parentControl != null)
+            if (ParentControl != null)
             {
                 Binding valueBinding = new Binding();
-                valueBinding.Source = _parentControl;
+                valueBinding.Source = ParentControl;
                 valueBinding.Path = new PropertyPath(ContinuousAxis.SourceValuesProperty);
-                this.SetBinding(ContinuousAxisPanel.DataValuesProperty, valueBinding);
+                SetBinding(DataValuesProperty, valueBinding);
 
                 Binding itemsBinding = new Binding();
                 itemsBinding.Source = this;
-                itemsBinding.Path = new PropertyPath(ContinuousAxisPanel.ItemsSourceProperty);
-                _parentControl.SetBinding(ContinuousAxis.ItemsSourceProperty, itemsBinding);
+                itemsBinding.Path = new PropertyPath(ItemsSourceProperty);
+                ParentControl.SetBinding(ItemsControl.ItemsSourceProperty, itemsBinding);
 
                 Binding refLineBinding = new Binding();
-                refLineBinding.Source = _parentControl;
+                refLineBinding.Source = ParentControl;
                 refLineBinding.Path = new PropertyPath(ContinuousAxis.ReferenceLineSeperationProperty);
-                this.SetBinding(ContinuousAxisPanel.ReferenceLineSeperationProperty, refLineBinding);
+                SetBinding(ReferenceLineSeperationProperty, refLineBinding);
 
                 Binding outputBinding = new Binding();
                 outputBinding.Source = this;
-                outputBinding.Path = new PropertyPath(ContinuousAxisPanel.YValuesProperty);
-                _parentControl.SetBinding(ContinuousAxis.ValuesProperty, outputBinding);
+                outputBinding.Path = new PropertyPath(YValuesProperty);
+                ParentControl.SetBinding(ContinuousAxis.ValuesProperty, outputBinding);
 
                 Binding tickPositionBinding = new Binding();
                 tickPositionBinding.Source = this;
-                tickPositionBinding.Path = new PropertyPath(ContinuousAxisPanel.TickPositionsProperty);
-                _parentControl.SetBinding(ContinuousAxis.TickPositionsProperty, tickPositionBinding);
+                tickPositionBinding.Path = new PropertyPath(TickPositionsProperty);
+                ParentControl.SetBinding(ContinuousAxis.TickPositionsProperty, tickPositionBinding);
 
                 Binding zerobinding = new Binding();
                 zerobinding.Source = this;
-                zerobinding.Path = new PropertyPath(ContinuousAxisPanel.OriginProperty);
-                _parentControl.SetBinding(ContinuousAxis.OriginProperty, zerobinding);
+                zerobinding.Path = new PropertyPath(OriginProperty);
+                ParentControl.SetBinding(ContinuousAxis.OriginProperty, zerobinding);
             }
         }
 
@@ -158,20 +156,20 @@ namespace StockTraderRI.ChartControls
             double rectWidth = _largestLabelSize.Width;
             double rectHeight = _largestLabelSize.Height;
             double increments = CalculatePixelIncrements(constraint, _largestLabelSize);
-            double start_width = constraint.Width - _largestLabelSize.Width / 2;
-            double end_width = start_width - (InternalChildren.Count - 1) * increments;
+            double startWidth = constraint.Width - _largestLabelSize.Width / 2;
+            double endWidth = startWidth - (InternalChildren.Count - 1) * increments;
             ObservableCollection<double> tempTickPositions = TickPositions;
 
-            if (start_width > end_width)
+            if (startWidth > endWidth)
             {
                 tempTickPositions.Clear();
-                Rect r = new Rect(start_width - rectWidth / 2, 0, rectWidth, rectHeight);
+                Rect r = new Rect(startWidth - rectWidth / 2, 0, rectWidth, rectHeight);
                 InternalChildren[0].Arrange(r);
-                tempTickPositions.Add(start_width);
+                tempTickPositions.Add(startWidth);
                 int count = InternalChildren.Count - 1;
-                r = new Rect(start_width - count * increments - rectWidth / 2, 0, rectWidth, rectHeight);
+                r = new Rect(startWidth - count * increments - rectWidth / 2, 0, rectWidth, rectHeight);
                 InternalChildren[count].Arrange(r);
-                tempTickPositions.Add(start_width - count * increments);
+                tempTickPositions.Add(startWidth - count * increments);
 
                 if (constraint.Width > 3 * rectWidth)
                 {
@@ -186,10 +184,10 @@ namespace StockTraderRI.ChartControls
 
                     for (int i = 2; i <= InternalChildren.Count - 1; i++)
                     {
-                        tempTickPositions.Add(start_width - (i - 1) * increments);
+                        tempTickPositions.Add(startWidth - (i - 1) * increments);
                         if (_canDisplayAllLabels || (i + 1) % _skipFactor == 0)
                         {
-                            r = new Rect(start_width - (i - 1) * increments - rectWidth / 2, 0, rectWidth, rectHeight);
+                            r = new Rect(startWidth - (i - 1) * increments - rectWidth / 2, 0, rectWidth, rectHeight);
                             InternalChildren[i-1].Arrange(r);
                         }
                         else
@@ -206,20 +204,20 @@ namespace StockTraderRI.ChartControls
             double rectWidth = _largestLabelSize.Width;
             double rectHeight = _largestLabelSize.Height;
             double increments = CalculatePixelIncrements(constraint, _largestLabelSize);
-            double start_height = constraint.Height - _largestLabelSize.Height / 2;
-            double end_height = start_height - (InternalChildren.Count - 1) * increments;
+            double startHeight = constraint.Height - _largestLabelSize.Height / 2;
+            double endHeight = startHeight - (InternalChildren.Count - 1) * increments;
             ObservableCollection<double> tempTickPositions = TickPositions;
 
-            if(start_height > end_height)
+            if(startHeight > endHeight)
             {
                 tempTickPositions.Clear();
-                Rect r = new Rect(constraint.Width - rectWidth, (start_height - rectHeight / 2), rectWidth, rectHeight);
+                Rect r = new Rect(constraint.Width - rectWidth, (startHeight - rectHeight / 2), rectWidth, rectHeight);
                 InternalChildren[0].Arrange(r);
-                tempTickPositions.Add(start_height);
+                tempTickPositions.Add(startHeight);
                 int count = InternalChildren.Count-1;
-                r = new Rect(constraint.Width - rectWidth, (start_height - count*increments - rectHeight / 2), rectWidth, rectHeight);
+                r = new Rect(constraint.Width - rectWidth, (startHeight - count*increments - rectHeight / 2), rectWidth, rectHeight);
                 InternalChildren[count].Arrange(r);
-                tempTickPositions.Add(start_height - count * increments);
+                tempTickPositions.Add(startHeight - count * increments);
 
                 if (constraint.Height > 3 * rectHeight)
                 {
@@ -234,10 +232,10 @@ namespace StockTraderRI.ChartControls
                     
                     for (int i = 2; i <= InternalChildren.Count-1; i++)
                     {
-                        tempTickPositions.Add(start_height - (i - 1) * increments);
+                        tempTickPositions.Add(startHeight - (i - 1) * increments);
                         if (_canDisplayAllLabels || (i + 1) % _skipFactor == 0 )
                         {
-                            r = new Rect(constraint.Width - rectWidth, (start_height - (i - 1) * increments - rectHeight / 2), rectWidth, rectHeight);
+                            r = new Rect(constraint.Width - rectWidth, (startHeight - (i - 1) * increments - rectHeight / 2), rectWidth, rectHeight);
                             InternalChildren[i - 1].Arrange(r);
                         }
                         else
@@ -252,19 +250,19 @@ namespace StockTraderRI.ChartControls
         private void CalculateYOutputValues(Size constraint)
         {
             YValues.Clear();
-            double start_val, lowPixel, highPixel;
+            double startVal, lowPixel, highPixel;
             double pixelIncrement = CalculatePixelIncrements(constraint, _largestLabelSize);
             if (Orientation.Equals(Orientation.Vertical))
             {
-                start_val = constraint.Height - _largestLabelSize.Height / 2;
-                lowPixel = start_val - (InternalChildren.Count - 1) * pixelIncrement;
-                highPixel = start_val;
+                startVal = constraint.Height - _largestLabelSize.Height / 2;
+                lowPixel = startVal - (InternalChildren.Count - 1) * pixelIncrement;
+                highPixel = startVal;
             }
             else
             {
-                start_val = constraint.Width - _largestLabelSize.Width / 2;
-                lowPixel = start_val - (InternalChildren.Count - 1) * pixelIncrement;
-                highPixel = start_val;
+                startVal = constraint.Width - _largestLabelSize.Width / 2;
+                lowPixel = startVal - (InternalChildren.Count - 1) * pixelIncrement;
+                highPixel = startVal;
             }
             if (highPixel < lowPixel)
                 return;
@@ -284,10 +282,10 @@ namespace StockTraderRI.ChartControls
         private void CalculateXOutputValues(Size constraint)
         {
             YValues.Clear();
-            double start_width = constraint.Width - _largestLabelSize.Width / 2;
+            double startWidth = constraint.Width - _largestLabelSize.Width / 2;
             double pixelIncrement = CalculatePixelIncrements(constraint, _largestLabelSize);
-            double lowPixel = start_width - (InternalChildren.Count - 1) * pixelIncrement;
-            double highPixel = start_width;
+            double lowPixel = startWidth - (InternalChildren.Count - 1) * pixelIncrement;
+            double highPixel = startWidth;
             if (highPixel < lowPixel)
                 return;
             for (int i = 0; i < DataValues.Count; i++)
@@ -322,7 +320,7 @@ namespace StockTraderRI.ChartControls
             bool startsAtZero = false;
             bool allPositiveValues = true;
             bool allNegativeValues = true;
-            double increment_value = 0;
+            double incrementValue = 0;
             int multiplier = 1;
             if (DataValues.Count == 0)
                 return 0.0;
@@ -373,7 +371,7 @@ namespace StockTraderRI.ChartControls
                 _startingIncrement = 0;
                 _numReferenceLines = 1;
                 _startsAtZero = startsAtZero;
-                return increment_value;
+                return incrementValue;
             }
 
             // Find an increment value that is in the set {1*10^x, 2*10^x, 5*10^x, where x is an integer 
@@ -399,7 +397,7 @@ namespace StockTraderRI.ChartControls
                         }
                         exp++;
                     }
-                    increment_value = multiplier * Math.Pow(10, exp);
+                    incrementValue = multiplier * Math.Pow(10, exp);
                 }
                 else
                 {
@@ -419,17 +417,17 @@ namespace StockTraderRI.ChartControls
                         }
                         if (high == low)
                         {
-                            increment_value = high;
-                            _valueIncrement = increment_value;
+                            incrementValue = high;
+                            _valueIncrement = incrementValue;
                             _numReferenceLines = 1;
                             break;
                         }
 
                         exp++;
                     }
-                    if (increment_value == 0)
+                    if (incrementValue == 0)
                     {
-                        increment_value = multiplier * Math.Pow(10, exp);
+                        incrementValue = multiplier * Math.Pow(10, exp);
                     }
                 }
             }
@@ -453,13 +451,13 @@ namespace StockTraderRI.ChartControls
                         }
                         exp++;
                     }
-                    increment_value = multiplier * Math.Pow(10, exp);
+                    incrementValue = multiplier * Math.Pow(10, exp);
                 }
                 else
                 {
                     int exp = 0;
                     if (low - high == 0.0)
-                        increment_value = 1.0;
+                        incrementValue = 1.0;
                     else
                     {
                         while (true)
@@ -477,64 +475,64 @@ namespace StockTraderRI.ChartControls
                             }
                             exp++;
                         }
-                        increment_value = multiplier * Math.Pow(10, exp);
+                        incrementValue = multiplier * Math.Pow(10, exp);
                     }
                 }
             }
 
 
 
-            double starting_value = 0;
+            double startingValue = 0;
 
             // Determine starting value if it is nonzero
             if (!startsAtZero)
             {
                 if (allPositiveValues)
                 {
-                    if (low % increment_value == 0)
+                    if (low % incrementValue == 0)
                     {
-                        starting_value = low;
+                        startingValue = low;
                     }
                     else
                     {
-                        starting_value = (int)(low / increment_value) * increment_value;
+                        startingValue = (int)(low / incrementValue) * incrementValue;
                     }
                 }
                 else
                 {
-                    if (low % increment_value == 0)
+                    if (low % incrementValue == 0)
                     {
-                        starting_value = low;
+                        startingValue = low;
                     }
                     else
                     {
-                        starting_value = (int)((low - increment_value) / increment_value) * increment_value;
+                        startingValue = (int)((low - incrementValue) / incrementValue) * incrementValue;
                     }
                 }
             }
             else if (startsAtZero && allNegativeValues)
             {
-                if (low % increment_value == 0)
+                if (low % incrementValue == 0)
                 {
-                    starting_value = low;
+                    startingValue = low;
                 }
                 else
                 {
-                    starting_value = (int)((low - increment_value) / increment_value) * increment_value;
+                    startingValue = (int)((low - incrementValue) / incrementValue) * incrementValue;
                 }
             }
 
             // Determine the number of reference lines
             //int numRefLines = 0;
-            int numRefLines = (int)Math.Ceiling((high - starting_value) / increment_value) + 1;
+            int numRefLines = (int)Math.Ceiling((high - startingValue) / incrementValue) + 1;
 
-            _valueIncrement = increment_value;
-            _startingIncrement = starting_value;
+            _valueIncrement = incrementValue;
+            _startingIncrement = startingValue;
             _numReferenceLines = numRefLines;
             _startsAtZero = startsAtZero;
             _allPositiveValues = allPositiveValues;
             _allNegativeValues = allNegativeValues;
-            return increment_value;
+            return incrementValue;
         }
 
         /// <summary>
@@ -576,8 +574,8 @@ namespace StockTraderRI.ChartControls
 
         public ObservableCollection<double> YValues
         {
-            get { return (ObservableCollection<double>)GetValue(YValuesProperty); }
-            set { SetValue(YValuesProperty, value); }
+            get => (ObservableCollection<double>)GetValue(YValuesProperty);
+            set => SetValue(YValuesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for YValues.  This enables animation, styling, binding, etc...
@@ -586,10 +584,7 @@ namespace StockTraderRI.ChartControls
 
 
 
-        public ObservableCollection<String> ItemsSource
-        {
-            get { return (ObservableCollection<String>)GetValue(ItemsSourceProperty); }
-        }
+        public ObservableCollection<String> ItemsSource => (ObservableCollection<String>)GetValue(ItemsSourceProperty);
 
         // Using a DependencyProperty as the backing store for Axis2Panel.  This enables animation, styling, binding, etc...
         private static readonly DependencyPropertyKey ItemsSourceKey =
@@ -600,8 +595,8 @@ namespace StockTraderRI.ChartControls
 
         private ObservableCollection<double> DataValues
         {
-            get { return (ObservableCollection<double>)GetValue(DataValuesProperty); }
-            set { SetValue(DataValuesProperty, value); }
+            get => (ObservableCollection<double>)GetValue(DataValuesProperty);
+            set => SetValue(DataValuesProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DataValues.  This enables animation, styling, binding, etc...
@@ -609,11 +604,7 @@ namespace StockTraderRI.ChartControls
             DependencyProperty.Register("DataValues", typeof(ObservableCollection<double>), typeof(ContinuousAxisPanel), new FrameworkPropertyMetadata(OnDataValuesChanged));
 
 
-        public ObservableCollection<double> TickPositions
-        {
-            get { return (ObservableCollection<double>)GetValue(TickPositionsProperty); }
-            //set { SetValue(TickPositionsProperty, value); }
-        }
+        public ObservableCollection<double> TickPositions => (ObservableCollection<double>)GetValue(TickPositionsProperty);
 
         // Using a DependencyProperty as the backing store for TickPositions.  This enables animation, styling, binding, etc...
         private static readonly DependencyPropertyKey TickPositionsKey =
@@ -623,8 +614,8 @@ namespace StockTraderRI.ChartControls
 
         public double Origin
         {
-            get { return (double)GetValue(OriginProperty); }
-            set { SetValue(OriginProperty, value); }
+            get => (double)GetValue(OriginProperty);
+            set => SetValue(OriginProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ZeroReferenceLinePosition.  This enables animation, styling, binding, etc...
@@ -634,8 +625,8 @@ namespace StockTraderRI.ChartControls
 
         public Orientation Orientation
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (Orientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
@@ -647,8 +638,8 @@ namespace StockTraderRI.ChartControls
 
         public double ReferenceLineSeperation
         {
-            get { return (double)GetValue(ReferenceLineSeperationProperty); }
-            set { SetValue(ReferenceLineSeperationProperty, value); }
+            get => (double)GetValue(ReferenceLineSeperationProperty);
+            set => SetValue(ReferenceLineSeperationProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ReferenceLineSeperation.  This enables animation, styling, binding, etc...
@@ -662,7 +653,7 @@ namespace StockTraderRI.ChartControls
         private int _skipFactor;
         private double _lowValue, _highValue;
         private Size _arrangeSize;
-        public ItemsControl _parentControl;
+        public ItemsControl ParentControl;
         private bool _startsAtZero;
         private double _startingIncrement;
         private double _valueIncrement;

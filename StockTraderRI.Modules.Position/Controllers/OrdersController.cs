@@ -1,42 +1,42 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using CommonServiceLocator;
 using Prism.Commands;
 using Prism.Regions;
 using StockTraderRI.Infrastructure;
 using StockTraderRI.Infrastructure.Interfaces;
 using StockTraderRI.Infrastructure.Models;
-using StockTraderRI.Modules.Position.Interfaces;
 using StockTraderRI.Modules.Position.Models;
-using StockTraderRI.Modules.Position.ViewModels;
 using StockTraderRI.Modules.Position.Properties;
+using StockTraderRI.Modules.Position.ViewModels;
+using StockTraderRI.Modules.Position.Views;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace StockTraderRI.Modules.Position.Controllers
 {
     public class OrdersController : IOrdersController
     {
         private IRegionManager _regionManager;
-        private readonly StockTraderRICommandProxy _commandProxy;
+        private readonly StockTraderRiCommandProxy _commandProxy;
         private IAccountPositionService _accountPositionService;
 
-        public OrdersController(IRegionManager regionManager, 
-                                StockTraderRICommandProxy commandProxy, 
+        public OrdersController(IRegionManager regionManager,
+                                StockTraderRiCommandProxy commandProxy,
                                 IAccountPositionService accountPositionService)
         {
             if (commandProxy == null)
             {
-                throw new ArgumentNullException("commandProxy");
+                throw new ArgumentNullException(nameof(commandProxy));
             }
 
             _regionManager = regionManager;
             _accountPositionService = accountPositionService;
-            this._commandProxy = commandProxy;
+            _commandProxy = commandProxy;
             BuyCommand = new DelegateCommand<string>(OnBuyExecuted);
             SellCommand = new DelegateCommand<string>(OnSellExecuted);
             SubmitAllVoteOnlyCommand = new DelegateCommand(() => { }, SubmitAllCanExecute);
-            OrderModels = new List<IOrderCompositeViewModel>();
+            OrderModels = new List<OrderCompositeViewModel>();
             commandProxy.SubmitAllOrdersCommand.RegisterCommand(SubmitAllVoteOnlyCommand);
         }
 
@@ -92,11 +92,11 @@ namespace StockTraderRI.Modules.Position.Controllers
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.StringCannotBeNullOrEmpty, "tickerSymbol"));
             }
-            this.ShowOrdersView();
+            ShowOrdersView();
 
             IRegion ordersRegion = _regionManager.Regions[RegionNames.OrdersRegion];
 
-            var orderCompositeViewModel = ServiceLocator.Current.GetInstance<IOrderCompositeViewModel>();
+            var orderCompositeViewModel = ServiceLocator.Current.GetInstance<OrderCompositeViewModel>();
 
             orderCompositeViewModel.TransactionInfo = new TransactionInfo(tickerSymbol, transactionType);
             orderCompositeViewModel.CloseViewRequested += delegate
@@ -109,7 +109,7 @@ namespace StockTraderRI.Modules.Position.Controllers
                 ordersRegion.Remove(orderCompositeViewModel);
                 if (ordersRegion.Views.Count() == 0)
                 {
-                    this.RemoveOrdersView();
+                    RemoveOrdersView();
                 }
             };
 
@@ -126,7 +126,7 @@ namespace StockTraderRI.Modules.Position.Controllers
 
         private void RemoveOrdersView()
         {
-            IRegion region = this._regionManager.Regions[RegionNames.ActionRegion];
+            IRegion region = _regionManager.Regions[RegionNames.ActionRegion];
 
             object ordersView = region.GetView("Orders");
             if (ordersView != null)
@@ -137,12 +137,12 @@ namespace StockTraderRI.Modules.Position.Controllers
 
         private void ShowOrdersView()
         {
-            IRegion region = this._regionManager.Regions[RegionNames.ActionRegion];
+            IRegion region = _regionManager.Regions[RegionNames.ActionRegion];
 
             object ordersView = region.GetView("Orders");
             if (ordersView == null)
             {
-                ordersView = ServiceLocator.Current.GetInstance<IOrders>();
+                ordersView = ServiceLocator.Current.GetInstance<Orders>();
                 region.Add(ordersView, "Orders");
             }
 
@@ -155,7 +155,7 @@ namespace StockTraderRI.Modules.Position.Controllers
         public DelegateCommand<string> SellCommand { get; private set; }
         public DelegateCommand SubmitAllVoteOnlyCommand { get; private set; }
 
-        private List<IOrderCompositeViewModel> OrderModels { get; set; }
+        private List<OrderCompositeViewModel> OrderModels { get; set; }
 
         #endregion
     }

@@ -6,24 +6,24 @@ namespace StockTraderRI.Modules.News.Views
 {
     public partial class Article : UserControl
     {
-        private INewsController _newsController { get; set; }
+        private INewsController NewsController { get; set; }
 
         public Article(INewsController newsController)
         {
             InitializeComponent();
-            _newsController = newsController;
+            NewsController = newsController;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.NewsList.SelectedItem != null)
+            if (NewsList.SelectedItem != null)
             {
-                var storyboard = (Storyboard)this.Resources["Details"];
+                var storyboard = (Storyboard)Resources["Details"];
                 storyboard.Begin();
             }
             else
             {
-                var storyboard = (Storyboard)this.Resources["List"];
+                var storyboard = (Storyboard)Resources["List"];
                 storyboard.Begin();
             }
         }

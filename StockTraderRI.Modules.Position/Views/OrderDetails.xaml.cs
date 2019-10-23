@@ -6,7 +6,7 @@ namespace StockTraderRI.Modules.Position.Views
     {
         public OrderDetails()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

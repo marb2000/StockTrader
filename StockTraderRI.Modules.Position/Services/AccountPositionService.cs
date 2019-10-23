@@ -35,8 +35,7 @@ namespace StockTraderRI.Modules.Position.Services
             {
                 XDocument document = XDocument.Load(sr);
                 _positions = document.Descendants("AccountPosition")
-                    .Select(
-                    x => new AccountPosition(x.Element("TickerSymbol").Value,
+                    .Select(x => new AccountPosition(x.Element("TickerSymbol").Value,
                                              decimal.Parse(x.Element("CostBasis").Value, CultureInfo.InvariantCulture),
                                              long.Parse(x.Element("Shares").Value, CultureInfo.InvariantCulture)))
                     .ToList();

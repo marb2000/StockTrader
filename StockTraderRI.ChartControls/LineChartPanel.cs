@@ -11,7 +11,7 @@ namespace StockTraderRI.ChartControls
 {
     public class LineChartPanel : Panel
     {
-        protected override void OnInitialized(System.EventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
             _childrenPositions = new ObservableCollection<Point>();
@@ -27,12 +27,12 @@ namespace StockTraderRI.ChartControls
             if (oldItems != null)
                 ((INotifyCollectionChanged)oldItems).CollectionChanged -= new NotifyCollectionChangedEventHandler(v.LineChartPanel_CollectionChanged);
 
-            if(args.Property == LineChartPanel.XValuesProperty)
+            if(args.Property == XValuesProperty)
             {
                 if (GetXValues(v)!= null)
                     GetXValues(v).CollectionChanged += new NotifyCollectionChangedEventHandler(v.LineChartPanel_CollectionChanged);
             }
-            else if(args.Property == LineChartPanel.YValuesProperty)
+            else if(args.Property == YValuesProperty)
             {
                 if(GetYValues(v)!=null)
                     GetYValues(v).CollectionChanged += new NotifyCollectionChangedEventHandler(v.LineChartPanel_CollectionChanged);
@@ -51,7 +51,7 @@ namespace StockTraderRI.ChartControls
         {
             if (dc == null)
             {
-                throw new ArgumentNullException("dc");
+                throw new ArgumentNullException(nameof(dc));
             }
 
             base.OnRender(dc);
@@ -136,8 +136,8 @@ namespace StockTraderRI.ChartControls
 
         public bool IsSmoothOutline
         {
-            get { return (bool)GetValue(IsSmoothOutlineProperty); }
-            set { SetValue(IsSmoothOutlineProperty, value); }
+            get => (bool)GetValue(IsSmoothOutlineProperty);
+            set => SetValue(IsSmoothOutlineProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for IsSmoothOutline.  This enables animation, styling, binding, etc...
@@ -146,8 +146,8 @@ namespace StockTraderRI.ChartControls
 
         public Pen LinePen
         {
-            get { return (Pen)GetValue(LinePenProperty); }
-            set { SetValue(LinePenProperty, value); }
+            get => (Pen)GetValue(LinePenProperty);
+            set => SetValue(LinePenProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for LinePen.  This enables animation, styling, binding, etc...
@@ -157,8 +157,8 @@ namespace StockTraderRI.ChartControls
 
         public Brush AreaBrush
         {
-            get { return (Brush)GetValue(AreaBrushProperty); }
-            set { SetValue(AreaBrushProperty, value); }
+            get => (Brush)GetValue(AreaBrushProperty);
+            set => SetValue(AreaBrushProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for AreaBrush.  This enables animation, styling, binding, etc...
@@ -168,15 +168,15 @@ namespace StockTraderRI.ChartControls
 
         private ObservableCollection<double> XValues
         {
-            get { return (ObservableCollection<double>)GetXValues(this); }
-            set { SetXValues(this, value); }
+            get => (ObservableCollection<double>)GetXValues(this);
+            set => SetXValues(this, value);
         }
 
         public static ObservableCollection<double> GetXValues(DependencyObject obj)
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (ObservableCollection<double>)obj.GetValue(XValuesProperty);
@@ -186,7 +186,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(XValuesProperty, value);
@@ -199,15 +199,15 @@ namespace StockTraderRI.ChartControls
 
         private ObservableCollection<double> YValues
         {
-            get { return (ObservableCollection<double>)GetYValues(this); }
-            set { SetYValues(this, value); }
+            get => (ObservableCollection<double>)GetYValues(this);
+            set => SetYValues(this, value);
         }
 
         public static ObservableCollection<double> GetYValues(DependencyObject obj)
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (ObservableCollection<double>)obj.GetValue(YValuesProperty);
@@ -217,7 +217,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(YValuesProperty, value);
@@ -233,7 +233,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (double)obj.GetValue(HorizontalAxisProperty);
@@ -243,7 +243,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(HorizontalAxisProperty, value);

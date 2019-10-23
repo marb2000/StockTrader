@@ -7,7 +7,7 @@ using StockTraderRI.Modules.Position.Controllers;
 
 namespace StockTraderRI.Modules.Position.ViewModels
 {
-    public class PositionSummaryViewModel : BindableBase, IPositionSummaryViewModel
+    public class PositionSummaryViewModel : BindableBase
     {
         private PositionSummaryItem _currentPositionSummaryItem;
 
@@ -19,7 +19,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
         {
             if (ordersController == null)
             {
-                throw new ArgumentNullException("ordersController");
+                throw new ArgumentNullException(nameof(ordersController));
             }
 
             _eventAggregator = eventAggregator;
@@ -35,10 +35,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         public ICommand SellCommand { get; private set; }
 
-        public string HeaderInfo
-        {
-            get=> "POSITION"; 
-        }
+        public string HeaderInfo => "POSITION";
 
         public PositionSummaryItem CurrentPositionSummaryItem
         {

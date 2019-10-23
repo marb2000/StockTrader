@@ -19,10 +19,7 @@ namespace StockTraderRI.Infrastructure.Models
 
         public string TickerSymbol
         {
-            get
-            {
-                return _tickerSymbol;
-            }
+            get => _tickerSymbol;
             set
             {
                 if (value == null)
@@ -43,10 +40,7 @@ namespace StockTraderRI.Infrastructure.Models
 
         public decimal CostBasis
         {
-            get
-            {
-                return _costBasis;
-            }
+            get => _costBasis;
             set
             {
                 if (!value.Equals(_costBasis))
@@ -62,10 +56,7 @@ namespace StockTraderRI.Infrastructure.Models
 
         public long Shares
         {
-            get
-            {
-                return _shares;
-            }
+            get => _shares;
             set
             {
                 if (!value.Equals(_shares))

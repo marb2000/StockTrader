@@ -3,8 +3,6 @@ using Prism.Regions;
 using StockTraderRI.Infrastructure;
 using StockTraderRI.Modules.Watch.Services;
 using Prism.Ioc;
-using Unity;
-using Prism.Mvvm;
 
 namespace StockTraderRI.Modules.Watch
 {

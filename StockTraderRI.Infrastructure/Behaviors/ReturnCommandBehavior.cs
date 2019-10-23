@@ -1,7 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System;
-using Prism.Commands;
 using Prism.Interactivity;
 
 namespace StockTraderRI.Infrastructure.Behaviors
@@ -21,13 +20,13 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (textBox == null)
             {
-                throw new ArgumentNullException("textBox");
+                throw new ArgumentNullException(nameof(textBox));
             }
 
             textBox.AcceptsReturn = false;
-            textBox.KeyDown += (s, e) => this.KeyPressed(e.Key);
-            textBox.GotFocus += (s, e) => this.GotFocus();
-            textBox.LostFocus += (s, e) => this.LostFocus();
+            textBox.KeyDown += (s, e) => KeyPressed(e.Key);
+            textBox.GotFocus += (s, e) => GotFocus();
+            textBox.LostFocus += (s, e) => LostFocus();
         }
 
         /// <summary>
@@ -45,15 +44,15 @@ namespace StockTraderRI.Infrastructure.Behaviors
             {
                 ExecuteCommand(TargetObject.Text);
 
-                this.ResetText();
+                ResetText();
             }
         }
 
         private void GotFocus()
         {
-            if (TargetObject != null && TargetObject.Text == this.DefaultTextAfterCommandExecution)
+            if (TargetObject != null && TargetObject.Text == DefaultTextAfterCommandExecution)
             {
-                this.ResetText();
+                ResetText();
             }
         }
 
@@ -64,9 +63,9 @@ namespace StockTraderRI.Infrastructure.Behaviors
 
         private void LostFocus()
         {
-            if (TargetObject != null && string.IsNullOrEmpty(TargetObject.Text) && this.DefaultTextAfterCommandExecution != null)
+            if (TargetObject != null && string.IsNullOrEmpty(TargetObject.Text) && DefaultTextAfterCommandExecution != null)
             {
-                TargetObject.Text = this.DefaultTextAfterCommandExecution;
+                TargetObject.Text = DefaultTextAfterCommandExecution;
             }
         }
     }

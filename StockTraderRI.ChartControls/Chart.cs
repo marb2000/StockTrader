@@ -1,7 +1,6 @@
 
 
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace StockTraderRI.ChartControls
@@ -13,15 +12,15 @@ namespace StockTraderRI.ChartControls
             return item is ChartItem;
         }
 
-        protected override System.Windows.DependencyObject GetContainerForItemOverride()
+        protected override DependencyObject GetContainerForItemOverride()
         {
             return new ChartItem();
         }
 
         public object Title
         {
-            get { return (object)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (object)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
@@ -30,8 +29,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplate TitleTemplate
         {
-            get { return (DataTemplate)GetValue(TitleTemplateProperty); }
-            set { SetValue(TitleTemplateProperty, value); }
+            get => (DataTemplate)GetValue(TitleTemplateProperty);
+            set => SetValue(TitleTemplateProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TitleTemplate.  This enables animation, styling, binding, etc...
@@ -42,8 +41,8 @@ namespace StockTraderRI.ChartControls
 
         public DataTemplateSelector TitleTemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(TitleTemplateSelectorProperty); }
-            set { SetValue(TitleTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)GetValue(TitleTemplateSelectorProperty);
+            set => SetValue(TitleTemplateSelectorProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TitleTemplateSelector.  This enables animation, styling, binding, etc...

@@ -15,8 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Data\Market.xml" />
-    <Resource Include="Data\MarketHistory.xml" />
+    <Resource Include="Data\Market.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\MarketHistory.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

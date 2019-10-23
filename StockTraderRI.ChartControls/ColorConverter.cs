@@ -1,7 +1,6 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Data;
 using System.Windows.Controls;
@@ -14,7 +13,6 @@ namespace StockTraderRI.ChartControls
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             Random r;
-            int index = 0;
 
             UIElement c = value as UIElement;
             Panel p = (Panel)VisualTreeHelper.GetParent(c);
@@ -24,8 +22,8 @@ namespace StockTraderRI.ChartControls
             }
             else
             {
-                ItemsControl _parent = ((ItemsControl)((FrameworkElement)VisualTreeHelper.GetParent(p)).TemplatedParent);
-                index = _parent.ItemContainerGenerator.IndexFromContainer(c);
+                ItemsControl parent = ((ItemsControl)((FrameworkElement)VisualTreeHelper.GetParent(p)).TemplatedParent);
+                var index = parent.ItemContainerGenerator.IndexFromContainer(c);
                 r = new Random((int)index);
             }
             Color color = Color.FromScRgb(1.0f, (float)r.NextDouble(), (float)r.NextDouble(), (float)r.NextDouble());

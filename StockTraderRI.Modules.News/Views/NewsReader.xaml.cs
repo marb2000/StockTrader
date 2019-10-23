@@ -9,12 +9,6 @@ namespace StockTraderRI.Modules.News.Views
             InitializeComponent();
         }
 
-        public static string Title
-        {
-            get
-            {
-                return Properties.Resources.NewsReaderViewTitle;
-            }
-        }
+        public static string Title => Properties.Resources.NewsReaderViewTitle;
     }
 }

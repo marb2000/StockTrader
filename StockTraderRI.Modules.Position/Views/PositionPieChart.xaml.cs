@@ -1,7 +1,6 @@
+using Prism.Events;
 using System;
 using System.Windows.Controls;
-using Prism.Events;
-using StockTraderRI.Modules.Position.ViewModels;
 
 namespace StockTraderRI.Modules.Position.Views
 {
@@ -12,12 +11,6 @@ namespace StockTraderRI.Modules.Position.Views
         public PositionPieChart()
         {
             InitializeComponent();
-        }
-
-        public IPositionPieChartViewModel Model
-        {
-            get => DataContext as IPositionPieChartViewModel;
-            set => DataContext = value;
         }
     }
 }

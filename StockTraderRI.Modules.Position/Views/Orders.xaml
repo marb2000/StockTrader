@@ -33,8 +33,8 @@
             </ListBox>
         </ScrollViewer>
         <StackPanel Height="Auto" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.RowSpan="1" HorizontalAlignment="Center" Grid.Row="1" Margin="5">
-            <Button Name="SubmitAllButton" Command="{x:Static inf:StockTraderRICommands.SubmitAllOrdersCommand}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">Submit All</Button>
-            <Button Name="CancelAllButton" Command="{x:Static inf:StockTraderRICommands.CancelAllOrdersCommand}" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand" Height="25">Cancel All</Button>
+            <Button Name="SubmitAllButton" Command="{x:Static inf:StockTraderRiCommands.SubmitAllOrdersCommand}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">Submit All</Button>
+            <Button Name="CancelAllButton" Command="{x:Static inf:StockTraderRiCommands.CancelAllOrdersCommand}" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand" Height="25">Cancel All</Button>
         </StackPanel>
     </Grid>
 </UserControl>

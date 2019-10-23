@@ -15,7 +15,7 @@ namespace StockTraderRI.ChartControls
         {
             if (thisV == null)
             {
-                throw new ArgumentNullException("thisV");
+                throw new ArgumentNullException(nameof(thisV));
             }
 
             PathGeometry fromGeometryFlat;
@@ -307,13 +307,13 @@ namespace StockTraderRI.ChartControls
                 double h = v1.Length * Math.Sin(theta * Math.PI / 180.0);
                 double deltai = Math.Sqrt(Math.Pow(v1.Length, 2) - h * h);
                 Vector v3 = p2 - p1;
-                double deltai_1 = Math.Sqrt(Math.Pow(v3.Length, 2) - h * h);
-                Point b3i_1 = p2 - (deltai_1 / (3 * (deltai + deltai_1))) * (p3 - p1);
-                Point b3i_2 = p2 + (deltai / (3 * (deltai + deltai_1))) * (p3 - p1);
+                double deltai1 = Math.Sqrt(Math.Pow(v3.Length, 2) - h * h);
+                Point b3I1 = p2 - (deltai1 / (3 * (deltai + deltai1))) * (p3 - p1);
+                Point b3I2 = p2 + (deltai / (3 * (deltai + deltai1))) * (p3 - p1);
 
-                ans[2 + 3 * i] = b3i_1;
+                ans[2 + 3 * i] = b3I1;
                 ans[2 + 3 * i + 1] = input[i + 1];
-                ans[2 + 3 * i + 2] = b3i_2;
+                ans[2 + 3 * i + 2] = b3I2;
             }
             ans[ans.GetLength(0) - 2] = input[inputLength - 1];
             ans[ans.GetLength(0) - 1] = input[inputLength - 1];
@@ -324,7 +324,7 @@ namespace StockTraderRI.ChartControls
         {
             if (input == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
             }
 
             if (input.Length == 0)

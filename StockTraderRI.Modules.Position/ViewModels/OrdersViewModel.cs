@@ -1,11 +1,8 @@
 
 namespace StockTraderRI.Modules.Position.ViewModels
 {
-    public partial class OrdersViewModel : IOrdersViewModel
+    public partial class OrdersViewModel
     {
-        public string HeaderInfo
-        {
-            get { return "BUY & SELL"; }
-        }
+        public string HeaderInfo => "BUY & SELL";
     }
 }

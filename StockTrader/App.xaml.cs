@@ -1,8 +1,6 @@
 using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Unity;
-using StockTraderRI.ViewModels;
 using StockTraderRI.Views;
 using System.Windows;
 

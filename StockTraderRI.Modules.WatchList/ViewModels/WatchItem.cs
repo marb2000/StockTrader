@@ -16,11 +16,8 @@ namespace StockTraderRI.Modules.Watch
 
         public decimal? CurrentPrice
         {
-            get { return _currentPrice; }
-            set
-            {
-                SetProperty(ref _currentPrice, value);
-            }
+            get => _currentPrice;
+            set => SetProperty(ref _currentPrice, value);
         }
     }
 }

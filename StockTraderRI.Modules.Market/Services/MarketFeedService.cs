@@ -16,7 +16,7 @@ namespace StockTraderRI.Modules.Market.Services
         private IEventAggregator EventAggregator { get; set; }
         private readonly Dictionary<string, decimal> _priceList = new Dictionary<string, decimal>();
         private readonly Dictionary<string, long> _volumeList = new Dictionary<string, long>();
-        static readonly Random randomGenerator = new Random(unchecked((int)DateTime.Now.Ticks));
+        static readonly Random RandomGenerator = new Random(unchecked((int)DateTime.Now.Ticks));
         private Timer _timer;
         private int _refreshInterval = 10000;
         private readonly object _lockObject = new object();
@@ -30,7 +30,7 @@ namespace StockTraderRI.Modules.Market.Services
         {
             if (document == null)
             {
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
             }
 
             EventAggregator = eventAggregator;
@@ -56,7 +56,7 @@ namespace StockTraderRI.Modules.Market.Services
 
         public int RefreshInterval
         {
-            get { return _refreshInterval; }
+            get => _refreshInterval;
             set
             {
                 _refreshInterval = value;
@@ -72,7 +72,7 @@ namespace StockTraderRI.Modules.Market.Services
         public decimal GetPrice(string tickerSymbol)
         {
             if (!SymbolExists(tickerSymbol))
-                throw new ArgumentException(Resources.MarketFeedTickerSymbolNotFoundException, "tickerSymbol");
+                throw new ArgumentException(Resources.MarketFeedTickerSymbolNotFoundException, nameof(tickerSymbol));
 
             return _priceList[tickerSymbol];
         }
@@ -104,7 +104,7 @@ namespace StockTraderRI.Modules.Market.Services
                 foreach (string symbol in _priceList.Keys.ToArray())
                 {
                     decimal newValue = _priceList[symbol];
-                    newValue += Convert.ToDecimal(randomGenerator.NextDouble() * 10f) - 5m;
+                    newValue += Convert.ToDecimal(RandomGenerator.NextDouble() * 10f) - 5m;
                     _priceList[symbol] = newValue > 0 ? newValue : 0.1m;
                 }
             }

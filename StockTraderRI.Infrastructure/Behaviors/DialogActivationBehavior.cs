@@ -15,7 +15,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public const string BehaviorKey = "DialogActivation";
 
-        private IWindow contentDialog;
+        private IWindow _contentDialog;
 
         /// <summary>
         /// Gets or sets the <see cref="DependencyObject"/> that the <see cref="IRegion"/> is attached to.
@@ -29,7 +29,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         protected override void OnAttach()
         {
-            this.Region.ActiveViews.CollectionChanged += this.ActiveViews_CollectionChanged;
+            Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
         }
 
         /// <summary>
@@ -46,45 +46,45 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                this.CloseContentDialog();
-                this.PrepareContentDialog(e.NewItems[0]);
+                CloseContentDialog();
+                PrepareContentDialog(e.NewItems[0]);
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                this.CloseContentDialog();
+                CloseContentDialog();
             }
         }
 
         private Style GetStyleForView()
         {
-            return this.HostControl.GetValue(RegionPopupBehaviors.ContainerWindowStyleProperty) as Style;
+            return HostControl.GetValue(RegionPopupBehaviors.ContainerWindowStyleProperty) as Style;
         }
 
         private void PrepareContentDialog(object view)
         {
-            this.contentDialog = this.CreateWindow();
-            this.contentDialog.Content = view;
-            this.contentDialog.Owner = this.HostControl;
-            this.contentDialog.Closed += this.ContentDialogClosed;
-            this.contentDialog.Style = this.GetStyleForView();
-            this.contentDialog.Show();
+            _contentDialog = CreateWindow();
+            _contentDialog.Content = view;
+            _contentDialog.Owner = HostControl;
+            _contentDialog.Closed += ContentDialogClosed;
+            _contentDialog.Style = GetStyleForView();
+            _contentDialog.Show();
         }
 
         private void CloseContentDialog()
         {
-            if (this.contentDialog != null)
+            if (_contentDialog != null)
             {
-                this.contentDialog.Closed -= this.ContentDialogClosed;
-                this.contentDialog.Close();
-                this.contentDialog.Content = null;
-                this.contentDialog.Owner = null;
+                _contentDialog.Closed -= ContentDialogClosed;
+                _contentDialog.Close();
+                _contentDialog.Content = null;
+                _contentDialog.Owner = null;
             }
         }
 
         private void ContentDialogClosed(object sender, System.EventArgs e)
         {
-            this.Region.Deactivate(this.contentDialog.Content);
-            this.CloseContentDialog();
+            Region.Deactivate(_contentDialog.Content);
+            CloseContentDialog();
         }
     }
 }

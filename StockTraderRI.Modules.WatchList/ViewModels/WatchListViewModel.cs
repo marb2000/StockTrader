@@ -32,12 +32,12 @@ namespace StockTraderRI.Modules.Watch.ViewModels
         {
             if (watchListService == null)
             {
-                throw new ArgumentNullException("watchListService");
+                throw new ArgumentNullException(nameof(watchListService));
             }
 
             if (eventAggregator == null)
             {
-                throw new ArgumentNullException("eventAggregator");
+                throw new ArgumentNullException(nameof(eventAggregator));
             }
             _marketFeedService = marketFeedService;
             _regionManager = regionManager;
@@ -50,7 +50,7 @@ namespace StockTraderRI.Modules.Watch.ViewModels
             PopulateWatchItemsList(_watchList);
 
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<MarketPricesUpdatedEvent>().Subscribe(this.MarketPricesUpdated, ThreadOption.UIThread);
+            _eventAggregator.GetEvent<MarketPricesUpdatedEvent>().Subscribe(MarketPricesUpdated, ThreadOption.UIThread);
 
             RemoveWatchCommand = new DelegateCommand<string>(RemoveWatch);
 
@@ -75,10 +75,10 @@ namespace StockTraderRI.Modules.Watch.ViewModels
         {
             if (updatedPrices == null)
             {
-                throw new ArgumentNullException("updatedPrices");
+                throw new ArgumentNullException(nameof(updatedPrices));
             }
 
-            foreach (WatchItem watchItem in this.WatchListItems)
+            foreach (WatchItem watchItem in WatchListItems)
             {
                 if (updatedPrices.ContainsKey(watchItem.TickerSymbol))
                 {
@@ -100,7 +100,7 @@ namespace StockTraderRI.Modules.Watch.ViewModels
                 decimal? currentPrice;
                 try
                 {
-                    currentPrice = this._marketFeedService.GetPrice(tickerSymbol);
+                    currentPrice = _marketFeedService.GetPrice(tickerSymbol);
                 }
                 catch (ArgumentException)
                 {

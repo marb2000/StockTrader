@@ -6,6 +6,11 @@
     <Shares>10</Shares>
   </AccountPosition>
   <AccountPosition>
+    <TickerSymbol>STOCK1</TickerSymbol>
+    <CostBasis>145.23</CostBasis>
+    <Shares>5</Shares>
+  </AccountPosition>
+  <AccountPosition>
     <TickerSymbol>STOCK2</TickerSymbol>
     <CostBasis>1900.22</CostBasis>
     <Shares>100</Shares>

@@ -16,9 +16,13 @@
         </DataTemplate>
     </UserControl.Resources>
     <Border BorderThickness="0,0,0,1" BorderBrush="#FFFFFFFF" Padding="10,10,10,10">
-        <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <TextBlock Text="PIE CHART" Style="{StaticResource TextBlockSectionTitle}" AutomationProperties.AutomationId="PieChartTextBlock"  />
             <chartControls:PieChart x:Name="pieChart" Grid.Row="1" ItemsSource="{Binding Path=Position.Items}" ValuePath="MarketValue" LabelPath="TickerSymbol" Title="" />
-        </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

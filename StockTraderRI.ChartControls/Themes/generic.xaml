@@ -230,8 +230,8 @@
       <Setter.Value>
         <DataTemplate>
           <StackPanel Orientation="Horizontal">
-            <TextBlock Height="20" Width="20" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorConverter}}"/>
-            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
+            <TextBlock Height="15" Width="15" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorConverter}}"/>
+            <TextBlock Padding="5,0" FontSize="10" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
           </StackPanel>
         </DataTemplate>
       </Setter.Value>

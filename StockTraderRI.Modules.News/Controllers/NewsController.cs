@@ -5,16 +5,16 @@ namespace StockTraderRI.Modules.News.Controllers
 {
     public class NewsController : INewsController
     {
-        private readonly ArticleViewModel articleViewModel;
-        private readonly NewsReaderViewModel newsReaderViewModel;
+        private readonly ArticleViewModel _articleViewModel;
+        private readonly NewsReaderViewModel _newsReaderViewModel;
 
         public NewsController(ArticleViewModel articleViewModel, NewsReaderViewModel newsReaderViewModel)
         {
-            this.articleViewModel = articleViewModel;
-            this.newsReaderViewModel = newsReaderViewModel;
+            _articleViewModel = articleViewModel;
+            _newsReaderViewModel = newsReaderViewModel;
             if (articleViewModel != null)
             {
-                this.articleViewModel.PropertyChanged += this.ArticleViewModel_PropertyChanged;
+                _articleViewModel.PropertyChanged += ArticleViewModel_PropertyChanged;
             }
         }
 
@@ -23,7 +23,7 @@ namespace StockTraderRI.Modules.News.Controllers
             switch (e.PropertyName)
             {
                 case "SelectedArticle":
-                    this.newsReaderViewModel.NewsArticle = this.articleViewModel.SelectedArticle;
+                    _newsReaderViewModel.NewsArticle = _articleViewModel.SelectedArticle;
                     break;
             }
         }

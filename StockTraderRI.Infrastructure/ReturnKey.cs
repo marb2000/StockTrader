@@ -41,7 +41,7 @@ namespace StockTraderRI.Infrastructure
         {
             if (textBox == null)
             {
-                throw new ArgumentNullException("textBox");
+                throw new ArgumentNullException(nameof(textBox));
             }
 
             textBox.SetValue(DefaultTextAfterCommandExecutionProperty, defaultText);
@@ -56,7 +56,7 @@ namespace StockTraderRI.Infrastructure
         {
             if (textBox == null)
             {
-                throw new ArgumentNullException("textBox");
+                throw new ArgumentNullException(nameof(textBox));
             }
 
             return textBox.GetValue(DefaultTextAfterCommandExecutionProperty) as string;
@@ -71,7 +71,7 @@ namespace StockTraderRI.Infrastructure
         {
             if (textBox == null)
             {
-                throw new ArgumentNullException("textBox");
+                throw new ArgumentNullException(nameof(textBox));
             }
 
             textBox.SetValue(CommandProperty, command);
@@ -86,7 +86,7 @@ namespace StockTraderRI.Infrastructure
         {
             if (textBox == null)
             {
-                throw new ArgumentNullException("textBox");
+                throw new ArgumentNullException(nameof(textBox));
             }
 
             return textBox.GetValue(CommandProperty) as ICommand;

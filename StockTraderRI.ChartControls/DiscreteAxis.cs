@@ -2,8 +2,6 @@
 
 using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Data;
-using System;
 using System.Collections.ObjectModel;
 
 
@@ -31,8 +29,8 @@ namespace StockTraderRI.ChartControls
 
         public ObservableCollection<double> TickPositions
         {
-            get { return (ObservableCollection<double>)GetValue(TickPositionsProperty); }
-            set { SetValue(TickPositionsProperty, value); }
+            get => (ObservableCollection<double>)GetValue(TickPositionsProperty);
+            set => SetValue(TickPositionsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for DiscreteAxisTickPositions.  This enables animation, styling, binding, etc...
@@ -42,8 +40,8 @@ namespace StockTraderRI.ChartControls
 
         public double Origin
         {
-            get { return (double)GetValue(OriginProperty); }
-            set { SetValue(OriginProperty, value); }
+            get => (double)GetValue(OriginProperty);
+            set => SetValue(OriginProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Origin.  This enables animation, styling, binding, etc...
@@ -53,8 +51,8 @@ namespace StockTraderRI.ChartControls
 
         public Orientation Orientation
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (Orientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
@@ -64,8 +62,8 @@ namespace StockTraderRI.ChartControls
 
         public double TickLength
         {
-            get { return (double)GetValue(TickLengthProperty); }
-            set { SetValue(TickLengthProperty, value); }
+            get => (double)GetValue(TickLengthProperty);
+            set => SetValue(TickLengthProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TickLength.  This enables animation, styling, binding, etc...

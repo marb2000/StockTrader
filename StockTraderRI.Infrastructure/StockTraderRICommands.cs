@@ -3,58 +3,46 @@
 namespace StockTraderRI.Infrastructure
 {
 
-    public static class StockTraderRICommands
+    public static class StockTraderRiCommands
     {
-        private static CompositeCommand submitOrderCommand = new CompositeCommand(true);
-        private static CompositeCommand cancelOrderCommand = new CompositeCommand(true);
-        private static CompositeCommand submitAllOrdersCommand = new CompositeCommand();
-        private static CompositeCommand cancelAllOrdersCommand = new CompositeCommand();
+        private static CompositeCommand _submitOrderCommand = new CompositeCommand(true);
+        private static CompositeCommand _cancelOrderCommand = new CompositeCommand(true);
+        private static CompositeCommand _submitAllOrdersCommand = new CompositeCommand();
+        private static CompositeCommand _cancelAllOrdersCommand = new CompositeCommand();
 
         public static CompositeCommand SubmitOrderCommand
         {
-            get { return submitOrderCommand; }
-            set { submitOrderCommand = value; }
+            get => _submitOrderCommand;
+            set => _submitOrderCommand = value;
         }
 
         public static CompositeCommand CancelOrderCommand
         {
-            get { return cancelOrderCommand; }
-            set { cancelOrderCommand = value; }
+            get => _cancelOrderCommand;
+            set => _cancelOrderCommand = value;
         }
 
         public static CompositeCommand SubmitAllOrdersCommand
         {
-            get { return submitAllOrdersCommand; }
-            set { submitAllOrdersCommand = value; }
+            get => _submitAllOrdersCommand;
+            set => _submitAllOrdersCommand = value;
         }
 
         public static CompositeCommand CancelAllOrdersCommand
         {
-            get { return cancelAllOrdersCommand; }
-            set { cancelAllOrdersCommand = value; }
+            get => _cancelAllOrdersCommand;
+            set => _cancelAllOrdersCommand = value;
         }
     }
 
-    public class StockTraderRICommandProxy
+    public class StockTraderRiCommandProxy
     {
-        virtual public CompositeCommand SubmitOrderCommand
-        {
-            get { return StockTraderRICommands.SubmitOrderCommand; }
-        }
+        virtual public CompositeCommand SubmitOrderCommand => StockTraderRiCommands.SubmitOrderCommand;
 
-        virtual public CompositeCommand CancelOrderCommand
-        {
-            get { return StockTraderRICommands.CancelOrderCommand; }
-        }
+        virtual public CompositeCommand CancelOrderCommand => StockTraderRiCommands.CancelOrderCommand;
 
-        virtual public CompositeCommand SubmitAllOrdersCommand
-        {
-            get { return StockTraderRICommands.SubmitAllOrdersCommand; }
-        }
+        virtual public CompositeCommand SubmitAllOrdersCommand => StockTraderRiCommands.SubmitAllOrdersCommand;
 
-        virtual public CompositeCommand CancelAllOrdersCommand
-        {
-            get { return StockTraderRICommands.CancelAllOrdersCommand; }
-        }
+        virtual public CompositeCommand CancelAllOrdersCommand => StockTraderRiCommands.CancelAllOrdersCommand;
     }
 }

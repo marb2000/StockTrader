@@ -8,14 +8,14 @@ namespace StockTraderRI.Infrastructure.Behaviors
     /// </summary>
     public class WindowWrapper : IWindow
     {
-        private readonly Window window;
+        private readonly Window _window;
 
         /// <summary>
         /// Initializes a new instance of <see cref="WindowWrapper"/>.
         /// </summary>
         public WindowWrapper()
         {
-            this.window = new Window();
+            _window = new Window();
         }
 
         /// <summary>
@@ -23,8 +23,8 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public event EventHandler Closed
         {
-            add { this.window.Closed += value; }
-            remove { this.window.Closed -= value; }
+            add => _window.Closed += value;
+            remove => _window.Closed -= value;
         }
 
         /// <summary>
@@ -32,8 +32,8 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public object Content
         {
-            get { return this.window.Content; }
-            set { this.window.Content = value; }
+            get => _window.Content;
+            set => _window.Content = value;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public object Owner
         {
-            get { return this.window.Owner; }
-            set { this.window.Owner = value as Window; }
+            get => _window.Owner;
+            set => _window.Owner = value as Window;
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public Style Style
         {
-            get { return this.window.Style; }
-            set { this.window.Style = value; }
+            get => _window.Style;
+            set => _window.Style = value;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public void Show()
         {
-            this.window.Show();
+            _window.Show();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         /// </summary>
         public void Close()
         {
-            this.window.Close();
+            _window.Close();
         }
     }
 }

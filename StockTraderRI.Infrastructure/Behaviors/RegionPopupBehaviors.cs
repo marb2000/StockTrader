@@ -38,7 +38,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (owner == null)
             {
-                throw new ArgumentNullException("owner");
+                throw new ArgumentNullException(nameof(owner));
             }
 
             return owner.GetValue(CreatePopupRegionWithNameProperty) as string;
@@ -53,7 +53,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (owner == null)
             {
-                throw new ArgumentNullException("owner");
+                throw new ArgumentNullException(nameof(owner));
             }
 
             owner.SetValue(CreatePopupRegionWithNameProperty, value);
@@ -68,7 +68,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (owner == null)
             {
-                throw new ArgumentNullException("owner");
+                throw new ArgumentNullException(nameof(owner));
             }
 
             return owner.GetValue(ContainerWindowStyleProperty) as Style;
@@ -83,7 +83,7 @@ namespace StockTraderRI.Infrastructure.Behaviors
         {
             if (owner == null)
             {
-                throw new ArgumentNullException("owner");
+                throw new ArgumentNullException(nameof(owner));
             }
 
             owner.SetValue(ContainerWindowStyleProperty, style);

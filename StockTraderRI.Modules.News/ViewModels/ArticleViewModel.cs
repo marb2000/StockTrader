@@ -16,94 +16,85 @@ namespace StockTraderRI.Modules.News.ViewModels
     public class ArticleViewModel : BindableBase
     {
         private string _companySymbol;
-        private IList<NewsArticle> articles;
-        private NewsArticle selectedArticle;
-        private readonly INewsFeedService newsFeedService;
-        private readonly IRegionManager regionManager;
-        private readonly ICommand showArticleListCommand;
-        private readonly ICommand showNewsReaderViewCommand;
+        private IList<NewsArticle> _articles;
+        private NewsArticle _selectedArticle;
+        private readonly INewsFeedService _newsFeedService;
+        private readonly IRegionManager _regionManager;
+        private readonly ICommand _showArticleListCommand;
+        private readonly ICommand _showNewsReaderViewCommand;
 
         public ArticleViewModel(INewsFeedService newsFeedService, IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             if (newsFeedService == null)
             {
-                throw new ArgumentNullException("newsFeedService");
+                throw new ArgumentNullException(nameof(newsFeedService));
             }
 
             if (regionManager == null)
             {
-                throw new ArgumentNullException("regionManager");
+                throw new ArgumentNullException(nameof(regionManager));
             }
 
             if (eventAggregator == null)
             {
-                throw new ArgumentNullException("eventAggregator");
+                throw new ArgumentNullException(nameof(eventAggregator));
             }
 
-            this.newsFeedService = newsFeedService;
-            this.regionManager = regionManager;
+            _newsFeedService = newsFeedService;
+            _regionManager = regionManager;
 
-            this.showArticleListCommand = new DelegateCommand(this.ShowArticleList);
-            this.showNewsReaderViewCommand = new DelegateCommand(this.ShowNewsReaderView);
+            _showArticleListCommand = new DelegateCommand(ShowArticleList);
+            _showNewsReaderViewCommand = new DelegateCommand(ShowNewsReaderView);
 
             eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Subscribe(OnTickerSymbolSelected, ThreadOption.UIThread);
         }
 
         public string CompanySymbol
         {
-            get
-            {
-                return this._companySymbol;
-            }
+            get => _companySymbol;
             set
             {
-                if (SetProperty(ref this._companySymbol, value))
+                if (SetProperty(ref _companySymbol, value))
                 {
-                    this.OnCompanySymbolChanged();
+                    OnCompanySymbolChanged();
                 }
             }
         }
 
         public NewsArticle SelectedArticle
         {
-            get { return this.selectedArticle; }
-            set
-            {
-                SetProperty(ref this.selectedArticle, value);
-            }
+            get => _selectedArticle;
+            set => SetProperty(ref _selectedArticle, value);
         }
 
         public IList<NewsArticle> Articles
         {
-            get { return this.articles; }
-            private set
-            {
-                SetProperty(ref this.articles, value);
-            }
+            get => _articles;
+            private set => SetProperty(ref _articles, value);
         }
 
-        public ICommand ShowNewsReaderCommand { get { return this.showNewsReaderViewCommand; } }
+        public ICommand ShowNewsReaderCommand => _showNewsReaderViewCommand;
 
-        public ICommand ShowArticleListCommand { get { return this.showArticleListCommand; } }
+        public ICommand ShowArticleListCommand => _showArticleListCommand;
 
         private void OnTickerSymbolSelected(string companySymbol)
         {
-            this.CompanySymbol = companySymbol;
+            CompanySymbol = companySymbol;
         }
 
         private void OnCompanySymbolChanged()
         {
-            this.Articles = newsFeedService.GetNews(_companySymbol);
+            Articles = _newsFeedService.GetNews(_companySymbol);
         }
 
         private void ShowArticleList()
         {
-            this.SelectedArticle = null;
+            SelectedArticle = null;
         }
 
         private void ShowNewsReaderView()
         {
-            this.regionManager.RequestNavigate(RegionNames.SecondaryRegion, new Uri("/NewsReaderView", UriKind.Relative));
+            _regionManager.RequestNavigate(RegionNames.SecondaryRegion, new Uri("/NewsReaderView", UriKind.Relative));
         }
     }
 }

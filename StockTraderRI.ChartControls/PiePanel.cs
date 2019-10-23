@@ -3,7 +3,6 @@
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Data;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System;
@@ -12,9 +11,9 @@ namespace StockTraderRI.ChartControls
 {
     public class PiePanel : Panel
     {
-        protected override void OnInitialized(System.EventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
-            ParentControl = ((ItemsControl)((FrameworkElement)VisualTreeHelper.GetParent(this)).TemplatedParent);
+            _parentControl = ((ItemsControl)((FrameworkElement)VisualTreeHelper.GetParent(this)).TemplatedParent);
             base.OnInitialized(e);
         }
 
@@ -62,9 +61,9 @@ namespace StockTraderRI.ChartControls
                     ContentControl container = InternalChildren[i] as ContentControl;
                     double wedgeAngle = (double)(GetValues(this)[i]) * 360 / total;
                     RotateTransform rt = new RotateTransform(offsetAngle, beginFigure.X, beginFigure.Y);
-                    container.SetValue(PiePanel.BeginFigurePointProperty, beginFigure);
-                    container.SetValue(PiePanel.LineToPointProperty, rt.Transform(lineToBeforeTransform));
-                    container.SetValue(PiePanel.WedgeAngleProperty, wedgeAngle);
+                    container.SetValue(BeginFigurePointProperty, beginFigure);
+                    container.SetValue(LineToPointProperty, rt.Transform(lineToBeforeTransform));
+                    container.SetValue(WedgeAngleProperty, wedgeAngle);
                     offsetAngle += wedgeAngle;
                     Rect r = new Rect(finalSize);
                     container.Arrange(r);
@@ -78,7 +77,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (double)obj.GetValue(WedgeAngleProperty);
@@ -88,7 +87,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(WedgeAngleProperty, value);
@@ -103,7 +102,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (Point)obj.GetValue(BeginFigurePointProperty);
@@ -113,7 +112,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(BeginFigurePointProperty, value);
@@ -128,7 +127,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (Point)obj.GetValue(LineToPointProperty);
@@ -138,7 +137,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(LineToPointProperty, value);
@@ -152,8 +151,8 @@ namespace StockTraderRI.ChartControls
 
         public PropertyPath ValuePath
         {
-            get { return (PropertyPath)GetValue(ValuePathProperty); }
-            set { SetValue(ValuePathProperty, value); }
+            get => (PropertyPath)GetValue(ValuePathProperty);
+            set => SetValue(ValuePathProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValuePath.  This enables animation, styling, binding, etc...
@@ -165,7 +164,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return (ObservableCollection<double>)obj.GetValue(ValuesProperty);
@@ -175,7 +174,7 @@ namespace StockTraderRI.ChartControls
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             obj.SetValue(ValuesProperty, value);
@@ -185,6 +184,6 @@ namespace StockTraderRI.ChartControls
         public static readonly DependencyProperty ValuesProperty =
             DependencyProperty.RegisterAttached("Values", typeof(ObservableCollection<double>), typeof(PiePanel), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnValuesChanged)));
 
-        private ItemsControl ParentControl;
+        private ItemsControl _parentControl;
     }
 }

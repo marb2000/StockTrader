@@ -18,20 +18,20 @@ namespace StockTraderRI.Controls
 
         public ResearchControl()
         {
-            this.Headers = new ObservableCollection<object>();
+            Headers = new ObservableCollection<object>();
         }
 
         public ObservableCollection<object> Headers
         {
-            get { return (ObservableCollection<object>)GetValue(HeadersProperty); }
-            private set { SetValue(HeadersProperty, value); }
+            get => (ObservableCollection<object>)GetValue(HeadersProperty);
+            private set => SetValue(HeadersProperty, value);
         }
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             if (e == null)
             {
-                throw new ArgumentNullException("e");
+                throw new ArgumentNullException(nameof(e));
             }
 
             base.OnItemsChanged(e);
@@ -39,11 +39,11 @@ namespace StockTraderRI.Controls
             {
                 object newItem = e.NewItems[0];
                 DependencyObject header = GetHeader(newItem as FrameworkElement);
-                this.Headers.Insert(e.NewStartingIndex, header);
+                Headers.Insert(e.NewStartingIndex, header);
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                this.Headers.RemoveAt(e.OldStartingIndex);
+                Headers.RemoveAt(e.OldStartingIndex);
             }
         }
 

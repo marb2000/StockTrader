@@ -12,43 +12,43 @@ using System.Globalization;
 
 namespace StockTraderRI.Modules.Position.ViewModels
 {
-    public class OrderDetailsViewModel : BindableBase, IOrderDetailsViewModel
+    public class OrderDetailsViewModel : BindableBase
     {
-        private readonly IAccountPositionService accountPositionService;
-        private readonly IOrdersService ordersService;
-        private TransactionInfo transactionInfo;
-        private int? shares;
-        private OrderType orderType = OrderType.Market;
-        private decimal? stopLimitPrice;
-        private TimeInForce timeInForce;
+        private readonly IAccountPositionService _accountPositionService;
+        private readonly IOrdersService _ordersService;
+        private TransactionInfo _transactionInfo;
+        private int? _shares;
+        private OrderType _orderType = OrderType.Market;
+        private decimal? _stopLimitPrice;
+        private TimeInForce _timeInForce;
 
-        private readonly List<string> errors = new List<string>();
+        private readonly List<string> _errors = new List<string>();
 
         public OrderDetailsViewModel(IAccountPositionService accountPositionService, IOrdersService ordersService)
         {
-            this.accountPositionService = accountPositionService;
-            this.ordersService = ordersService;
+            _accountPositionService = accountPositionService;
+            _ordersService = ordersService;
 
-            this.transactionInfo = new TransactionInfo();
+            _transactionInfo = new TransactionInfo();
 
             //use localizable enum descriptions
-            this.AvailableOrderTypes = new ValueDescriptionList<OrderType>
+            AvailableOrderTypes = new ValueDescriptionList<OrderType>
                                         {
                                             new ValueDescription<OrderType>(OrderType.Limit, Resources.OrderType_Limit),
                                             new ValueDescription<OrderType>(OrderType.Market, Resources.OrderType_Market),
                                             new ValueDescription<OrderType>(OrderType.Stop, Resources.OrderType_Stop)
                                         };
 
-            this.AvailableTimesInForce = new ValueDescriptionList<TimeInForce>
+            AvailableTimesInForce = new ValueDescriptionList<TimeInForce>
                                           {
                                               new ValueDescription<TimeInForce>(TimeInForce.EndOfDay, Resources.TimeInForce_EndOfDay),
                                               new ValueDescription<TimeInForce>(TimeInForce.ThirtyDays, Resources.TimeInForce_ThirtyDays)
                                           };
 
-            this.SubmitCommand = new DelegateCommand<object>(this.Submit, this.CanSubmit);
-            this.CancelCommand = new DelegateCommand<object>(this.Cancel);
+            SubmitCommand = new DelegateCommand<object>(Submit, CanSubmit);
+            CancelCommand = new DelegateCommand<object>(Cancel);
 
-            this.SetInitialValidState();
+            SetInitialValidState();
         }
 
         public event EventHandler CloseViewRequested = delegate { };
@@ -59,83 +59,73 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         public TransactionInfo TransactionInfo
         {
-            get { return this.transactionInfo; }
+            get => _transactionInfo;
             set
             {
-                SetProperty(ref this.transactionInfo, value);
-                this.OnPropertyChanged(() => this.TickerSymbol);
+                SetProperty(ref _transactionInfo, value);
+                RaisePropertyChanged("TickerSymbol");
             }
         }
 
         public TransactionType TransactionType
         {
-            get { return this.transactionInfo.TransactionType; }
+            get => _transactionInfo.TransactionType;
             set
             {
-                this.ValidateHasEnoughSharesToSell(this.Shares, value, false);
-                if (this.transactionInfo.TransactionType != value)
+                ValidateHasEnoughSharesToSell(Shares, value, false);
+                if (_transactionInfo.TransactionType != value)
                 {
-                    this.transactionInfo.TransactionType = value;
-                    OnPropertyChanged(() => this.TransactionType);
+                    _transactionInfo.TransactionType = value;
+                    RaisePropertyChanged("TransactionType");
                 }
             }
         }
 
         public string TickerSymbol
         {
-            get { return this.transactionInfo.TickerSymbol; }
+            get => _transactionInfo.TickerSymbol;
             set
             {
-                if (transactionInfo.TickerSymbol != value)
+                if (_transactionInfo.TickerSymbol != value)
                 {
-                    this.transactionInfo.TickerSymbol = value;
-                    OnPropertyChanged(() => this.TickerSymbol);
+                    _transactionInfo.TickerSymbol = value;
+                    RaisePropertyChanged("TickerSymbol");
                 }
             }
         }
 
         public int? Shares
         {
-            get { return this.shares; }
+            get => _shares;
             set
             {
-                this.ValidateShares(value, true);
-                this.ValidateHasEnoughSharesToSell(value, this.TransactionType, true);
+                ValidateShares(value, true);
+                ValidateHasEnoughSharesToSell(value, TransactionType, true);
 
-                SetProperty(ref this.shares, value);
+                SetProperty(ref _shares, value);
             }
         }
 
         public OrderType OrderType
         {
-            get { return this.orderType; }
-            set
-            {
-                SetProperty(ref this.orderType, value);
-            }
+            get => _orderType;
+            set => SetProperty(ref _orderType, value);
         }
 
         public decimal? StopLimitPrice
         {
-            get
-            {
-                return this.stopLimitPrice;
-            }
+            get => _stopLimitPrice;
             set
             {
-                this.ValidateStopLimitPrice(value, true);
-
-                SetProperty(ref this.stopLimitPrice, value);
+                ValidateStopLimitPrice(value, true);
+                SetProperty(ref _stopLimitPrice, value);
             }
         }
 
         public TimeInForce TimeInForce
         {
-            get { return this.timeInForce; }
-            set
-            {
-                SetProperty(ref this.timeInForce, value);
-            }
+            get => _timeInForce;
+            set => SetProperty(ref _timeInForce, value);
         }
 
         public DelegateCommand<object> SubmitCommand { get; private set; }
@@ -144,15 +134,15 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         private void SetInitialValidState()
         {
-            this.ValidateShares(this.Shares, false);
-            this.ValidateStopLimitPrice(this.StopLimitPrice, false);
+            ValidateShares(Shares, false);
+            ValidateStopLimitPrice(StopLimitPrice, false);
         }
 
         private void ValidateShares(int? newSharesValue, bool throwException)
         {
             if (!newSharesValue.HasValue || newSharesValue.Value <= 0)
             {
-                this.AddError("InvalidSharesRange");
+                AddError("InvalidSharesRange");
                 if (throwException)
                 {
                     throw new InputValidationException(Resources.InvalidSharesRange);
@@ -160,7 +150,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
             }
             else
             {
-                this.RemoveError("InvalidSharesRange");
+                RemoveError("InvalidSharesRange");
             }
         }
 
@@ -168,7 +158,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
         {
             if (!price.HasValue || price.Value <= 0)
             {
-                this.AddError("InvalidStopLimitPrice");
+                AddError("InvalidStopLimitPrice");
                 if (throwException)
                 {
                     throw new InputValidationException(Resources.InvalidStopLimitPrice);
@@ -176,15 +166,15 @@ namespace StockTraderRI.Modules.Position.ViewModels
             }
             else
             {
-                this.RemoveError("InvalidStopLimitPrice");
+                RemoveError("InvalidStopLimitPrice");
             }
         }
 
         private void ValidateHasEnoughSharesToSell(int? sharesToSell, TransactionType transactionType, bool throwException)
         {
-            if (transactionType == TransactionType.Sell && !this.HoldsEnoughShares(this.TickerSymbol, sharesToSell))
+            if (transactionType == TransactionType.Sell && !HoldsEnoughShares(TickerSymbol, sharesToSell))
             {
-                this.AddError("NotEnoughSharesToSell");
+                AddError("NotEnoughSharesToSell");
                 if (throwException)
                 {
                     throw new InputValidationException(String.Format(CultureInfo.InvariantCulture, Resources.NotEnoughSharesToSell, sharesToSell));
@@ -192,34 +182,34 @@ namespace StockTraderRI.Modules.Position.ViewModels
             }
             else
             {
-                this.RemoveError("NotEnoughSharesToSell");
+                RemoveError("NotEnoughSharesToSell");
             }
         }
 
         private void AddError(string ruleName)
         {
-            if (!this.errors.Contains(ruleName))
+            if (!_errors.Contains(ruleName))
             {
-                this.errors.Add(ruleName);
-                this.SubmitCommand.RaiseCanExecuteChanged();
+                _errors.Add(ruleName);
+                SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
         private void RemoveError(string ruleName)
         {
-            if (this.errors.Contains(ruleName))
+            if (_errors.Contains(ruleName))
             {
-                this.errors.Remove(ruleName);
-                if (this.errors.Count == 0)
+                _errors.Remove(ruleName);
+                if (_errors.Count == 0)
                 {
-                    this.SubmitCommand.RaiseCanExecuteChanged();
+                    SubmitCommand.RaiseCanExecuteChanged();
                 }
             }
         }
 
         private bool CanSubmit(object parameter)
         {
-            return this.errors.Count == 0;
+            return _errors.Count == 0;
         }
 
         private bool HoldsEnoughShares(string symbol, int? sharesToSell)
@@ -229,7 +219,7 @@ namespace StockTraderRI.Modules.Position.ViewModels
                 return false;
             }
 
-            foreach (AccountPosition accountPosition in this.accountPositionService.GetAccountPositions())
+            foreach (AccountPosition accountPosition in _accountPositionService.GetAccountPositions())
             {
                 if (accountPosition.TickerSymbol.Equals(symbol, StringComparison.OrdinalIgnoreCase))
                 {
@@ -248,20 +238,26 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
         private void Submit(object parameter)
         {
-            if (!this.CanSubmit(parameter))
+            if (!CanSubmit(parameter))
             {
                 throw new InvalidOperationException();
             }
 
-            var order = new Order();
-            order.TransactionType = this.TransactionType;
-            order.OrderType = this.OrderType;
-            order.Shares = this.Shares.Value;
-            order.StopLimitPrice = this.StopLimitPrice.Value;
-            order.TickerSymbol = this.TickerSymbol;
-            order.TimeInForce = this.TimeInForce;
+            if (Shares != null || StopLimitPrice != null)
+            {
+                var order = new Order
+                {
+                    TransactionType = TransactionType,
+                    OrderType = OrderType,
+                    Shares = Shares.Value,
+                    StopLimitPrice = StopLimitPrice.Value,
+                    TickerSymbol = TickerSymbol,
+                    TimeInForce = TimeInForce
+                };
 
-            ordersService.Submit(order);
+                _ordersService.Submit(order);
+
+            }
 
             CloseViewRequested(this, EventArgs.Empty);
         }

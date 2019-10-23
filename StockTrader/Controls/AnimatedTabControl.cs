@@ -19,29 +19,29 @@ namespace StockTraderRI.Controls
 
         public event RoutedEventHandler SelectionChanging
         {
-            add { AddHandler(SelectionChangingEvent, value); }
-            remove { RemoveHandler(SelectionChangingEvent, value); }
+            add => AddHandler(SelectionChangingEvent, value);
+            remove => RemoveHandler(SelectionChangingEvent, value);
         }
 
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
-            this.Dispatcher.BeginInvoke(
+            Dispatcher.BeginInvoke(
                 (Action)delegate
                 {
-                    this.RaiseSelectionChangingEvent();
+                    RaiseSelectionChangingEvent();
 
-                    this.StopTimer();
+                    StopTimer();
 
-                    this._timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 500) };
+                    _timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 500) };
 
                     EventHandler handler = null;
                     handler = (sender, args) =>
                         {
-                            this.StopTimer();
+                            StopTimer();
                             base.OnSelectionChanged(e);
                         };
-                    this._timer.Tick += handler;
-                    this._timer.Start();
+                    _timer.Tick += handler;
+                    _timer.Start();
                 });
         }
 
@@ -54,10 +54,10 @@ namespace StockTraderRI.Controls
 
         private void StopTimer()
         {
-            if (this._timer != null)
+            if (_timer != null)
             {
-                this._timer.Stop();
-                this._timer = null;
+                _timer.Stop();
+                _timer = null;
             }
         }
     }

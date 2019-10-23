@@ -22,19 +22,19 @@ namespace StockTraderRI.Modules.Market.ViewModels
         {
             if (eventAggregator == null)
             {
-                throw new ArgumentNullException("eventAggregator");
+                throw new ArgumentNullException(nameof(eventAggregator));
             }
 
-            this._marketHistoryService = marketHistoryService;
-            eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Subscribe(this.TickerSymbolChanged);
+            _marketHistoryService = marketHistoryService;
+            eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Subscribe(TickerSymbolChanged);
         }
 
         public void TickerSymbolChanged(string newTickerSymbol)
         {
-            MarketHistoryCollection newHistoryCollection = this._marketHistoryService.GetPriceHistory(newTickerSymbol);
+            MarketHistoryCollection newHistoryCollection = _marketHistoryService.GetPriceHistory(newTickerSymbol);
 
-            this.TickerSymbol = newTickerSymbol;
-            this.HistoryCollection = newHistoryCollection;
+            TickerSymbol = newTickerSymbol;
+            HistoryCollection = newHistoryCollection;
         }
     }
 }

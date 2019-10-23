@@ -17,7 +17,7 @@ namespace StockTraderRI
             {
                 if (parameter == null)
                 {
-                    throw new ArgumentNullException("parameter");
+                    throw new ArgumentNullException(nameof(parameter));
                 }
 
                 return new GridLength(double.Parse(parameter.ToString(), culture), GridUnitType.Star);

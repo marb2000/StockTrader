@@ -11,19 +11,14 @@ namespace StockTraderRI.Modules.Position.Services
 {
     public class XmlOrdersService : IOrdersService
     {
-        private ILoggerFacade logger;
+        private readonly ILoggerFacade _logger;
 
         public XmlOrdersService(ILoggerFacade logger)
         {
-            this.logger = logger;
+            _logger = logger;
         }
-        private string _fileName = "SubmittedOrders.xml";
 
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
+        public string FileName { get; set; } = "SubmittedOrders.xml";
 
         public void Submit(Order order)
         {
@@ -36,12 +31,12 @@ namespace StockTraderRI.Modules.Position.Services
         {
             if (order == null)
             {
-                throw new ArgumentNullException("order");
+                throw new ArgumentNullException(nameof(order));
             }
 
             if (document == null)
             {
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
             }
 
             var ordersElement = document.Element("Orders");
@@ -62,9 +57,9 @@ namespace StockTraderRI.Modules.Position.Services
                 );
             ordersElement.Add(orderElement);
 
-            string message = String.Format(CultureInfo.CurrentCulture, Resources.LogOrderSubmitted,
+            string message = string.Format(CultureInfo.CurrentCulture, Resources.LogOrderSubmitted,
                                            orderElement.ToString());
-            logger.Log(message, Category.Debug, Priority.Low);
+            _logger.Log(message, Category.Debug, Priority.Low);
         }
     }
 }

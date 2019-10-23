@@ -7,15 +7,15 @@ namespace StockTraderRI.Modules.Watch.ViewModels
 {
     public class AddWatchViewModel : BindableBase
     {
-        private string stockSymbol;
+        private string _stockSymbol;
         private IWatchListService _watchListService;
-        public ICommand AddWatchCommand { get { return _watchListService.AddWatchCommand; } }
+        public ICommand AddWatchCommand => _watchListService.AddWatchCommand;
 
         public AddWatchViewModel(IWatchListService watchListService)
         {
             if (watchListService == null)
             {
-                throw new ArgumentNullException("watchListService");
+                throw new ArgumentNullException(nameof(watchListService));
             }
 
             _watchListService = watchListService;
@@ -23,11 +23,8 @@ namespace StockTraderRI.Modules.Watch.ViewModels
 
         public string StockSymbol
         {
-            get { return stockSymbol; }
-            set
-            {
-                SetProperty(ref stockSymbol, value);
-            }
+            get => _stockSymbol;
+            set => SetProperty(ref _stockSymbol, value);
         }
     }
 }

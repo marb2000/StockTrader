@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Images\Annotation_New.png" />
+    <None Remove="Data\Images\info.png" />
+    <None Remove="Data\News.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
 
@@ -24,6 +30,18 @@
 
   <ItemGroup>
     <Folder Include="Article\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\Images\Annotation_New.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\Images\info.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Data\News.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

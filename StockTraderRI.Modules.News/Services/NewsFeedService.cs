@@ -13,12 +13,12 @@ namespace StockTraderRI.Modules.News.Services
 {
     public class NewsFeedService : INewsFeedService
     {
-        readonly Dictionary<string, List<NewsArticle>> newsData = new Dictionary<string, List<NewsArticle>>();
+        readonly Dictionary<string, List<NewsArticle>> _newsData = new Dictionary<string, List<NewsArticle>>();
 
         public NewsFeedService()
         {
             var document = XDocument.Parse(Resources.News);
-            newsData = document.Descendants("NewsItem")
+            _newsData = document.Descendants("NewsItem")
                 .GroupBy(x => x.Attribute("TickerSymbol").Value,
                 x => new NewsArticle
                 {
@@ -35,7 +35,7 @@ namespace StockTraderRI.Modules.News.Services
         public IList<NewsArticle> GetNews(string tickerSymbol)
         {
             List<NewsArticle> articles = new List<NewsArticle>();
-            newsData.TryGetValue(tickerSymbol, out articles);
+            _newsData.TryGetValue(tickerSymbol, out articles);
             return articles;
         }
 
@@ -43,7 +43,7 @@ namespace StockTraderRI.Modules.News.Services
 
         public bool HasNews(string tickerSymbol)
         {
-            return newsData.ContainsKey(tickerSymbol);
+            return _newsData.ContainsKey(tickerSymbol);
         }
 
         #endregion

@@ -71,14 +71,8 @@ namespace StockTraderRI.Modules.Position
             }
         }
 
-        public decimal MarketValue
-        {
-            get => _shares * _currentPrice;
-        }
+        public decimal MarketValue => _shares * _currentPrice;
 
-        public decimal GainLossPercent
-        {
-            get => (CurrentPrice * Shares - CostBasis) * 100 / CostBasis;
-        }
+        public decimal GainLossPercent => (CurrentPrice * Shares - CostBasis) * 100 / CostBasis;
     }
 }

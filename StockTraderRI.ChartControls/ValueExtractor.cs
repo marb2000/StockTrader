@@ -90,7 +90,7 @@ namespace StockTraderRI.ChartControls
                 b.XPath = ValuePath.Path;
             else
                 b.Path = ValuePath;
-            BindingOperations.SetBinding(this, ValueExtractor.ValueHolderProperty, b);
+            BindingOperations.SetBinding(this, ValueHolderProperty, b);
         }
 
         private static bool IsXmlNodeHelper(object item)
@@ -100,8 +100,8 @@ namespace StockTraderRI.ChartControls
 
         public ItemCollection Items
         {
-            get { return (ItemCollection)GetValue(ItemsProperty); }
-            set { SetValue(ItemsProperty, value); }
+            get => (ItemCollection)GetValue(ItemsProperty);
+            set => SetValue(ItemsProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
@@ -111,8 +111,8 @@ namespace StockTraderRI.ChartControls
 
         public PropertyPath ValuePath
         {
-            get { return (PropertyPath)GetValue(ValuePathProperty); }
-            set { SetValue(ValuePathProperty, value); }
+            get => (PropertyPath)GetValue(ValuePathProperty);
+            set => SetValue(ValuePathProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValuePath.  This enables animation, styling, binding, etc...
@@ -120,10 +120,7 @@ namespace StockTraderRI.ChartControls
             DependencyProperty.Register("ValuePath", typeof(PropertyPath), typeof(ValueExtractor), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnValuePathChanged)));
 
 
-        public ObservableCollection<double> Values
-        {
-            get { return (ObservableCollection<double>)GetValue(ValuesProperty); }
-        }
+        public ObservableCollection<double> Values => (ObservableCollection<double>)GetValue(ValuesProperty);
 
         // Using a DependencyProperty as the backing store for Values.  This enables animation, styling, binding, etc...
         private static readonly DependencyPropertyKey ValuesKey =
@@ -133,8 +130,8 @@ namespace StockTraderRI.ChartControls
 
         private double ValueHolder
         {
-            get { return (double)GetValue(ValueHolderProperty); }
-            set { SetValue(ValueHolderProperty, value); }
+            get => (double)GetValue(ValueHolderProperty);
+            set => SetValue(ValueHolderProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for ValueHolder.  This enables animation, styling, binding, etc...

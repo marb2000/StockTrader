@@ -5,17 +5,11 @@ namespace StockTraderRI.Modules.News.ViewModels
 {
     public class NewsReaderViewModel : BindableBase
     {
-        private NewsArticle newsArticle;
+        private NewsArticle _newsArticle;
         public NewsArticle NewsArticle
         {
-            get
-            {
-                return this.newsArticle;
-            }
-            set
-            {
-                SetProperty(ref this.newsArticle, value);
-            }
+            get => _newsArticle;
+            set => SetProperty(ref _newsArticle, value);
         }
 
     }
