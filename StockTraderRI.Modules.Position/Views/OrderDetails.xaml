@@ -4,8 +4,8 @@
     xmlns:inf="clr-namespace:StockTraderRI.Infrastructure;assembly=StockTraderRI.Infrastructure"
     xmlns:infConverters="clr-namespace:StockTraderRI.Infrastructure.Converters;assembly=StockTraderRI.Infrastructure"
     x:Class="StockTraderRI.Modules.Position.Views.OrderDetails"
-    xmlns:prism="http://prismlibrary.com/"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:xamlhost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
+    xmlns:prism="http://prismlibrary.com/" xmlns:customControls="clr-namespace:StockTraderRI.CustomControls;assembly=StockTraderRI.CustomControls"
     x:Name="UserControl">
     <UserControl.Resources>
 
@@ -39,6 +39,25 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+
+        <!-- TODO: Center the popup -->
+        <Popup x:Name="SignaturePopup" Width="520" Height="630"  
+               AllowsTransparency="True" PopupAnimation="Fade"
+               Placement="Center"  
+               IsOpen="{Binding Path=IsSignatureRequired, Mode=OneWay}" >
+            <Border  BorderThickness="1" Background="White" BorderBrush="DarkGray"
+                     Margin="0,0,15,15"
+                     CornerRadius="5" >
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Opacity="0.5"  ShadowDepth="4" Direction="-60" 
+                                      RenderingBias="Quality" />
+                </Border.Effect>
+                <xamlhost:WindowsXamlHost Width="500" Height="600" x:Name="SignatureView" 
+                                          InitialTypeName="WindowsXAMLControls.SignatureView" 
+                                          ChildChanged="WindowsXamlHost_ChildChanged" />
+            </Border>
+        </Popup>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <RadioButton Name="BuyRadio" AutomationProperties.AutomationId="BuyRadioButton"  IsChecked="{Binding Path=TransactionType, Mode=TwoWay, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static inf:TransactionType.Buy}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Center">Buy</RadioButton>

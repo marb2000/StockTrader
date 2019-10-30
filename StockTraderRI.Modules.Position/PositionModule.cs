@@ -25,6 +25,8 @@ namespace StockTraderRI.Modules.Position
             containerRegistry.RegisterSingleton<IOrdersService, XmlOrdersService>();
             containerRegistry.RegisterSingleton<IOrdersController, OrdersController>();
             containerRegistry.Register<IObservablePosition, ObservablePosition>();
+
+
         }
     }
 }

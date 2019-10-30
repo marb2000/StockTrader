@@ -29,7 +29,7 @@ namespace StockTraderRI.Modules.Watch.Services
 
         private void AddWatch(string tickerSymbol)
         {
-            if (!String.IsNullOrEmpty(tickerSymbol))
+            if (!string.IsNullOrEmpty(tickerSymbol))
             {
                 string upperCasedTrimmedSymbol = tickerSymbol.ToUpper(CultureInfo.InvariantCulture).Trim();
                 if (!WatchItems.Contains(upperCasedTrimmedSymbol))

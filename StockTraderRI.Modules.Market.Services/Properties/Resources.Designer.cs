@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StockTraderRI.Modules.Market.Properties {
+namespace StockTraderRI.Modules.Market.Services.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace StockTraderRI.Modules.Market.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StockTraderRI.Modules.Market.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StockTraderRI.Modules.Market.Services.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -72,15 +72,6 @@ namespace StockTraderRI.Modules.Market.Properties {
         internal static string Market {
             get {
                 return ResourceManager.GetString("Market", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Symbol does not exist in market feed..
-        /// </summary>
-        internal static string MarketFeedTickerSymbolNotFoundException {
-            get {
-                return ResourceManager.GetString("MarketFeedTickerSymbolNotFoundException", resourceCulture);
             }
         }
         

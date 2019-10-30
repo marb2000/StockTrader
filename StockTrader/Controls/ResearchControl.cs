@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System;
 
-namespace StockTraderRI.Controls
+namespace StockTraderRI.CustomControls
 {
     /// <summary>
     /// Custom ItemsControl with Header.

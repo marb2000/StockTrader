@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace StockTraderRI.Controls
+namespace StockTraderRI.CustomControls
 {
     public class AnimatedTabControl : TabControl
     {

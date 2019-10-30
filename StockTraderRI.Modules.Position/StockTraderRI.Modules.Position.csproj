@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win10-x64;win-x64;win10-x86;win-x86</RuntimeIdentifiers>
+    <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,12 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.XamlHost" Version="6.0.0-preview9.1" />
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StockTraderRI.ChartControls\StockTraderRI.ChartControls.csproj" />
+    <ProjectReference Include="..\StockTraderRI.CustomControls\StockTraderRI.CustomControls.csproj" />
     <ProjectReference Include="..\StockTraderRI.Infrastructure\StockTraderRI.Infrastructure.csproj" />
+    <ProjectReference Include="..\WindowsXAMLControls\WindowsXAMLControls.csproj" />
   </ItemGroup>
 
   <ItemGroup>

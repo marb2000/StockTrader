@@ -3,6 +3,7 @@ using Prism.Regions;
 using StockTraderRI.Infrastructure;
 using StockTraderRI.Modules.Watch.Services;
 using Prism.Ioc;
+using Prism.Mvvm;
 
 namespace StockTraderRI.Modules.Watch
 {
@@ -19,6 +20,10 @@ namespace StockTraderRI.Modules.Watch
         void IModule.RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IWatchListService, WatchListService>();
+
+            //If the View and the ViewModel are in different assemblies, the convention doesn't work
+            //you have to register the View within the ViewModel manually
+            ViewModelLocationProvider.Register<Views.AddWatch, ViewModels.AddWatchViewModel>();
         }
     }
 }

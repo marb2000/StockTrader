@@ -1,11 +1,11 @@
-﻿using System;
+﻿using StockTraderRI.Infrastructure.Interfaces;
+using StockTraderRI.Infrastructure.Models;
+using StockTraderRI.Modules.Market.Services.Properties;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
-using StockTraderRI.Infrastructure.Interfaces;
-using StockTraderRI.Infrastructure.Models;
-using StockTraderRI.Modules.Market.Properties;
 
 namespace StockTraderRI.Modules.Market.Services
 {

@@ -3,15 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.XamlHost" Version="6.0.0-preview9.1" />
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StockTraderRI.ChartControls\StockTraderRI.ChartControls.csproj" />
     <ProjectReference Include="..\StockTraderRI.Infrastructure\StockTraderRI.Infrastructure.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Modules.WatchList.ViewModels\StockTraderRI.Modules.WatchList.ViewModels.csproj" />
+    <ProjectReference Include="..\WindowsXAMLControls\WindowsXAMLControls.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,24 +4,36 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RuntimeIdentifiers>win10-x64;win-x64;win10-x86;win-x86</RuntimeIdentifiers>
+    <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Resources\ResourceNames.cs" />
+    <Compile Remove="Controls\RoundedBox.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Controls\RoundedBox.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Win32.UI.XamlApplication" Version="6.0.0-preview9.1" />
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.XamlHost" Version="6.0.0-preview9.1" />
     <PackageReference Include="Prism.Unity" Version="7.2.0.1367" />
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StockTraderRI.ChartControls\StockTraderRI.ChartControls.csproj" />
+    <ProjectReference Include="..\StockTraderRI.CustomControls\StockTraderRI.CustomControls.csproj" />
     <ProjectReference Include="..\StockTraderRI.Infrastructure\StockTraderRI.Infrastructure.csproj" />
     <ProjectReference Include="..\StockTraderRI.Modules.Market\StockTraderRI.Modules.Market.csproj" />
     <ProjectReference Include="..\StockTraderRI.Modules.News\StockTraderRI.Modules.News.csproj" />
     <ProjectReference Include="..\StockTraderRI.Modules.Position\StockTraderRI.Modules.Position.csproj" />
     <ProjectReference Include="..\StockTraderRI.Modules.WatchList\StockTraderRI.Modules.WatchList.csproj" />
+    <ProjectReference Include="..\WindowsXAMLControls\WindowsXAMLControls.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +46,21 @@
     <Resource Include="Resources\shadow_t.png" />
     <Resource Include="Resources\shadow_tl.png" />
     <Resource Include="Resources\shadow_tr.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

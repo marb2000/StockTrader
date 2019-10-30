@@ -2,12 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
     <PackageReference Include="Prism.Unity" Version="7.2.0.1367" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StockTraderRI.Infrastructure.Interfaces\StockTraderRI.Infrastructure.Interfaces.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Infrastructure.Messages\StockTraderRI.Infrastructure.Messages.csproj" />
+    <ProjectReference Include="..\StockTraderRI.Infrastructure.Models\StockTraderRI.Infrastructure.Models.csproj" />
   </ItemGroup>
 
 </Project>

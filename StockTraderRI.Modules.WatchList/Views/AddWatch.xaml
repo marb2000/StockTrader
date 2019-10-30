@@ -4,10 +4,12 @@
     xmlns:inf="clr-namespace:StockTraderRI.Infrastructure;assembly=StockTraderRI.Infrastructure"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True"
->
+    >
     <Grid>
         <StackPanel Orientation="Horizontal">
+            <!-- TODO: I have changed the visibility to just show the UWP view that is on the Shell temporarily-->
             <TextBox Name="AddWatchTextBox" 
+                     Visibility="Collapsed"
                      MinWidth="100" 
                      Style="{StaticResource CustomTextBoxStyle}" 
                      inf:ReturnKey.Command="{Binding Path=AddWatchCommand}" 

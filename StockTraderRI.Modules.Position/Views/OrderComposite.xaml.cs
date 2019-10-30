@@ -1,4 +1,6 @@
+using StockTraderRI.Modules.Position.ViewModels;
 using System.Windows.Controls;
+using Unity;
 
 namespace StockTraderRI.Modules.Position.Views
 {
@@ -8,5 +10,6 @@ namespace StockTraderRI.Modules.Position.Views
         {
             InitializeComponent();
         }
+        
     }
 }

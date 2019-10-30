@@ -6,8 +6,8 @@ using System.Threading;
 using System.Xml.Linq;
 using StockTraderRI.Infrastructure;
 using StockTraderRI.Infrastructure.Interfaces;
-using StockTraderRI.Modules.Market.Properties;
 using Prism.Events;
+using StockTraderRI.Modules.Market.Services.Properties;
 
 namespace StockTraderRI.Modules.Market.Services
 {
@@ -21,6 +21,8 @@ namespace StockTraderRI.Modules.Market.Services
         private int _refreshInterval = 10000;
         private readonly object _lockObject = new object();
 
+        public List<string> TickerSymbols { get; }
+
         public MarketFeedService(IEventAggregator eventAggregator)
             : this(XDocument.Parse(Resources.Market), eventAggregator)
         {
@@ -32,6 +34,8 @@ namespace StockTraderRI.Modules.Market.Services
             {
                 throw new ArgumentNullException(nameof(document));
             }
+
+            TickerSymbols = new List<string>();
 
             EventAggregator = eventAggregator;
             _timer = new Timer(TimerTick);
@@ -47,6 +51,7 @@ namespace StockTraderRI.Modules.Market.Services
             foreach (XElement item in itemElements)
             {
                 string tickerSymbol = item.Attribute("TickerSymbol").Value;
+                if (!TickerSymbols.Contains(tickerSymbol)) TickerSymbols.Add(tickerSymbol);
                 decimal lastPrice = decimal.Parse(item.Attribute("LastPrice").Value, NumberStyles.Float, CultureInfo.InvariantCulture);
                 long volume = Convert.ToInt64(item.Attribute("Volume").Value, CultureInfo.InvariantCulture);
                 _priceList.Add(tickerSymbol, lastPrice);
@@ -72,7 +77,7 @@ namespace StockTraderRI.Modules.Market.Services
         public decimal GetPrice(string tickerSymbol)
         {
             if (!SymbolExists(tickerSymbol))
-                throw new ArgumentException(Resources.MarketFeedTickerSymbolNotFoundException, nameof(tickerSymbol));
+                throw new ArgumentException("MarketFeedTickerSymbolNotFoundException", nameof(tickerSymbol));
 
             return _priceList[tickerSymbol];
         }

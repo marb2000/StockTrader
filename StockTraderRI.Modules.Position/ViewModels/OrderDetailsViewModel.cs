@@ -6,9 +6,11 @@ using StockTraderRI.Infrastructure.Models;
 using StockTraderRI.Modules.Position.Interfaces;
 using StockTraderRI.Modules.Position.Models;
 using StockTraderRI.Modules.Position.Properties;
+using StockTraderRI.Modules.Position.Views;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Windows;
 
 namespace StockTraderRI.Modules.Position.ViewModels
 {
@@ -236,6 +238,16 @@ namespace StockTraderRI.Modules.Position.ViewModels
             return false;
         }
 
+        bool _isSignatureRequired;
+        public bool IsSignatureRequired
+        {
+            get => _isSignatureRequired;
+            set
+            {
+                SetProperty(ref _isSignatureRequired, value);
+            }
+        }
+
         private void Submit(object parameter)
         {
             if (!CanSubmit(parameter))
@@ -245,20 +257,29 @@ namespace StockTraderRI.Modules.Position.ViewModels
 
             if (Shares != null || StopLimitPrice != null)
             {
-                var order = new Order
+                if (Shares.Value >= 10)
                 {
-                    TransactionType = TransactionType,
-                    OrderType = OrderType,
-                    Shares = Shares.Value,
-                    StopLimitPrice = StopLimitPrice.Value,
-                    TickerSymbol = TickerSymbol,
-                    TimeInForce = TimeInForce
-                };
-
-                _ordersService.Submit(order);
-
+                    IsSignatureRequired = true;
+                }
+                else
+                {
+                    SubmitOrder();
+                }
             }
+        }
 
+        public void SubmitOrder()
+        {
+            var order = new Order
+            {
+                TransactionType = TransactionType,
+                OrderType = OrderType,
+                Shares = Shares.Value,
+                StopLimitPrice = StopLimitPrice.Value,
+                TickerSymbol = TickerSymbol,
+                TimeInForce = TimeInForce
+            };
+            _ordersService.Submit(order);
             CloseViewRequested(this, EventArgs.Empty);
         }
 
